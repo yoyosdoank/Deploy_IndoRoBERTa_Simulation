@@ -18,13 +18,13 @@ note2 = st.caption("*Rekomendasi analisis: Twitter.")
 note3 = st.caption("*Dimungkinkan analisis dari media sosial lainnya.")
 button = st.button("Lakukan Analisis")
 
-d = {
+sentimen = {
   2:'Positif',  
   1:'Netral',
   0:'Negatif'
 }
 
-e = {
+emosi = {
   4:'Sedih',
   3:'Sayang',
   2:'Senang',  
@@ -46,5 +46,5 @@ if user_input and button :
     st.write("Label Emosi: ",pred_label_idx2)
     y_pred1 = np.argmax(output1.logits.detach().numpy(),axis=1)
     y_pred2 = np.argmax(output2.logits.detach().numpy(),axis=1)
-    st.write("Klasifikasi Sentimen: ",d[y_pred1[0]])
-    st.write("Klasifikasi Emosi: ",e[y_pred2[0]])
+    st.write("Klasifikasi Sentimen: ",sentimen[y_pred1[0]])
+    st.write("Klasifikasi Emosi: ",emosi[y_pred2[0]])
