@@ -12,7 +12,7 @@ def get_model():
 
 tokenizer,model1,model2 = get_model()
 
-user_input = st.text_area('Masukkan kalimat yang akan dianalisis:')
+user_input = st.text_area('Masukkan kalimat yang akan dianalisis (direkomendasikan minimal 5 kata untuk 1 kalimat):')
 button = st.button("Lakukan Analisis")
 
 d = {
