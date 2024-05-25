@@ -12,7 +12,7 @@ def get_model():
 
 tokenizer,model1,model2 = get_model()
 
-user_input = st.text_area('Masukkan kalimat dari media sosial yang akan dianalisis:')
+user_input = st.text_area('Masukkan komentar media sosial yang akan dianalisis:')
 note = st.caption("*NOTE: Untuk masukan kalimat, direkomendasikan lebih dari 5 kata, agar mesin dapat merepresentasi konteks kalimat")
 button = st.button("Lakukan Analisis")
 
