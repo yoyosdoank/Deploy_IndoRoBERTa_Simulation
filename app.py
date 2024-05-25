@@ -13,12 +13,13 @@ def get_model():
 tokenizer,model1,model2 = get_model()
 
 header = st.header("Klasifikasi Sentimen & Emosi Pada Teks Media Sosial Berbahasa Indonesia Dengan Metode Deep Learning")
-note = st.caption("Sentimen adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. Sedangkan emosi adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat.")
-note0 = st.caption("-Ivanov, D. (2023)-")
+note = st.caption("Author: Yogie Oktavianus Sihombing")
+note0 = st.caption("Sentimen adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. Sedangkan emosi adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat.")
+note1 = st.caption("-Ivanov, D. (2023)-")
 user_input = st.text_area('Masukkan postingan/komentar yang akan dianalisis:')
-note1 = st.caption("*Untuk masukan kalimat, direkomendasikan lebih dari 7 kata, agar mesin dapat merepresentasi konteks kalimat")
-note2 = st.caption("*Rekomendasi analisis: Twitter.")
-note3 = st.caption("*Dimungkinkan analisis dari media sosial lainnya.")
+note2 = st.caption("*Untuk masukan kalimat, direkomendasikan lebih dari 7 kata, agar mesin dapat merepresentasi konteks kalimat")
+note3 = st.caption("*Rekomendasi analisis: Twitter.")
+note4 = st.caption("*Dimungkinkan analisis dari media sosial lainnya.")
 button = st.button("Lakukan Analisis")
 
 sentimen = {
