@@ -16,7 +16,6 @@ user_input = st.text_area('Masukkan komentar Twitter yang akan dianalisis:')
 note1 = st.caption("*Note: Untuk masukan kalimat, direkomendasikan lebih dari 7 kata, agar mesin dapat merepresentasi konteks kalimat.")
 note2 = st.caption("*Dimungkinkan analisis dari postingan media sosial lainnya")
 button = st.button("Lakukan Analisis")
-button = st.button("Lakukan Analisis")
 
 d = {
   2:'Positif',  
