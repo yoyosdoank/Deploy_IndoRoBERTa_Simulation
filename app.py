@@ -19,6 +19,7 @@ user_input = st.text_area('Masukkan postingan/komentar dalam bahasa Indonesia un
 note3 = st.caption("*Untuk masukan kalimat, direkomendasikan lebih dari 7 kata, agar mesin dapat merepresentasi konteks kalimat")
 note4 = st.caption("*Rekomendasi analisis: Twitter.")
 note5 = st.caption("*Dimungkinkan analisis dari media sosial lainnya.")
+note5 = st.caption("*Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.")
 button = st.button("Lakukan Analisis")
 
 sentimen = {
