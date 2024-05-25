@@ -12,8 +12,8 @@ def get_model():
 
 tokenizer,model1,model2 = get_model()
 
-header = st.header("Klasifikasi Sentimen & Emosi Berbasis Teks Pada Twitter Berbahasa Indonesia Dengan Metode Deep Learning")
-user_input = st.text_area('Masukkan postingan/komentar Twitter yang akan dianalisis:')
+header = st.header("Klasifikasi Sentimen & Emosi Pada Teks Media Sosial Berbahasa Indonesia Dengan Metode Deep Learning")
+user_input = st.text_area('Masukkan postingan/komentar yang akan dianalisis:')
 note1 = st.caption("*Untuk masukan kalimat, direkomendasikan lebih dari 7 kata, agar mesin dapat merepresentasi konteks kalimat")
 note2 = st.caption("*Rekomendasi analisis: Twitter.")
 note3 = st.caption("*Dimungkinkan analisis dari media sosial lainnya.")
