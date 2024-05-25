@@ -28,8 +28,8 @@ e = {
   4:'Sedih',
   3:'Sayang',
   2:'Senang',  
-  1:'Takut/Terkejut',
-  0:'Marah/Jijik'
+  1:'Takut - Khawatir',
+  0:'Marah - Jijik'
 }
 
 if user_input and button :
