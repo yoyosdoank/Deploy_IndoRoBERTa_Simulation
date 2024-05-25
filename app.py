@@ -1,11 +1,11 @@
 import streamlit as st
 import numpy as np
-from transformers import RobertaFastTokenizer, AutoModelForSequenceClassification
+from transformers import RobertaTokenizerFast, AutoModelForSequenceClassification
 import torch
 
 @st.cache_resource()
 def get_model():
-    tokenizer = RobertaFastTokenizer.from_pretrained('flax-community/indonesian-roberta-base')
+    tokenizer = RobertaTokenizerFast.from_pretrained('flax-community/indonesian-roberta-base')
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-for-Twitter", token="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")
     return tokenizer,model1,model2
