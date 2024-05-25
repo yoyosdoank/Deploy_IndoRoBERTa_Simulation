@@ -29,9 +29,9 @@ sentimen = {
 }
 
 emosi = {
-  4:'Sedih',
-  3:'Cinta',
-  2:'Senang',  
+  4:'Sedih / Kecewa',
+  3:'Cinta / Sayang',
+  2:'Senang / Bahagia',  
   1:'Takut / Khawatir',
   0:'Marah / Jijik'
 }
