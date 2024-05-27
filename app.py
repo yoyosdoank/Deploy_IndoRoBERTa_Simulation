@@ -4,6 +4,20 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from langdetect import detect
 from collections import Counter
+import os
+import subprocess
+
+# Download models
+def download_models():
+    subprocess.call(["python", "setup.py"])
+
+# Check if models are downloaded, if not, download them
+if not os.path.exists("polyglot_data"):
+    st.info("Downloading models... Please wait.")
+    download_models()
+    st.success("Models downloaded successfully!")
+
+# Continue with the rest of your Streamlit app
 
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
