@@ -25,9 +25,6 @@ note5 = st.caption("*Dimungkinkan analisis dari media sosial lainnya.")
 note6 = st.caption("*Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.")
 button = st.button("Lakukan Analisis")
 
-# Variabel untuk menyimpan status konfirmasi
-confirm = False
-
 sentimen = {
   2:'Positif',  
   1:'Netral',
