@@ -60,11 +60,11 @@ if user_input and button:
             # Periksa apakah ada karakter dengan kemunculan lebih dari 2
             if any(count > 2 for count in char_count.values()):
                 problematic_words.append(word)
-                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks.")
+                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks dan prediksi.")
             # Periksa apakah kata tidak memiliki huruf vokal
             if not has_vowel(word):
                 problematic_words.append(word)
-                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks.")
+                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
