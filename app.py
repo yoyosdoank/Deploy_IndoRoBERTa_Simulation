@@ -90,21 +90,13 @@ if user_input and button:
         max_emotion_index = torch.argmax(logits2, dim=1).item()
         max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
-       # Simpan hasil prediksi
-        predicted_sentiment = sentimen[max_sentiment_index]
-        predicted_emotion = emosi[max_emotion_index]
-
+        # Display the highest predicted sentiment and emotion along with their scores
+        st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
+        st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
 
-    # Tampilkan hasil prediksi jika ada
-    if predicted_sentiment is not None and predicted_emotion is not None:
-        st.write("Sentimen:", f"**{predicted_sentiment}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
-        st.write("Emosi:", f"**{predicted_emotion}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
-
-# Jika tombol reset ditekan, reset input dan hasil
+# Jika tombol reset ditekan, hapus input dan hasil sebelumnya
 if reset_button:
     user_input = ''
-    predicted_sentiment = None
-    predicted_emotion = None
 
