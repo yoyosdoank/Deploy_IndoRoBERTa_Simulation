@@ -58,6 +58,7 @@ with st.form(key='my_form'):
             indonesian_word_count = 0
             # Cek bahasa setiap kata dalam input
             for word in user_input.split():
+                try:
                 # Cek bahasa dari kata menggunakan library langdetect
                 lang = detect(word)
                 if lang == 'en':
@@ -72,9 +73,12 @@ with st.form(key='my_form'):
                 # Periksa apakah kata tidak memiliki huruf vokal
                 if not has_vowel(word):
                     st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
-            # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
-            if english_word_count > indonesian_word_count:
-                st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
+            except:
+                st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
+        # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
+        if english_word_count > indonesian_word_count:
+            st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
+
                     
             inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
