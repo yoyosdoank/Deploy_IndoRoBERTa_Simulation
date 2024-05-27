@@ -30,6 +30,20 @@ note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
 note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
 button = st.button("Lakukan Analisis")
 
+sentimen = {
+  2:'Positif',  
+  1:'Netral',
+  0:'Negatif'
+}
+
+emosi = {
+  4:'Sedih - Kecewa',
+  3:'Sayang',
+  2:'Senang - Bahagia',  
+  1:'Takut - Khawatir',
+  0:'Marah - Jijik'
+}
+
 # Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
