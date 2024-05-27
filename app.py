@@ -94,6 +94,8 @@ if user_input and button:
         st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
+        
 # Jika tombol reset ditekan, hapus input dan hasil sebelumnya
 if reset_button:
     user_input = ''
+    st.text_area('Inputkan Kalimat:')
