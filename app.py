@@ -63,10 +63,10 @@ if user_input and button:
             char_count = Counter(word)
             # Periksa apakah ada karakter dengan kemunculan lebih dari 2
             if any(count > 2 for count in char_count.values()):
-                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks.")
+                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks dan prediksi.")
             # Periksa apakah kata tidak memiliki huruf vokal
             if not has_vowel(word):
-                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks.")
+                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
         # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
         if english_word_count > indonesian_word_count:
             st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
