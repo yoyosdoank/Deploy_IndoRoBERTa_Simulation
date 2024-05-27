@@ -35,10 +35,7 @@ note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal
 note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
 note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
 note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
-button = st.button("ANALISIS")
-reset_button = st.button("RESET")
 
-    
 sentimen = {
   2:'Positif',  
   1:'Netral',
@@ -53,56 +50,57 @@ emosi = {
   0:'Marah - Jijik'
 }
 
-# Jika tombol ditekan, lakukan analisis awal
-if user_input and button:
-    # Cek apakah input memiliki lebih dari 7 kata
-    if len(user_input.split()) > 7:
-        # Variabel untuk menghitung jumlah kata dalam bahasa Inggris dan Indonesia
-        english_word_count = 0
-        indonesian_word_count = 0
-        # Cek bahasa setiap kata dalam input
-        for word in user_input.split():
-            # Cek bahasa dari kata menggunakan library langdetect
-            lang = detect(word)
-            if lang == 'en':
-                english_word_count += 1
-            elif lang == 'id':
-                indonesian_word_count += 1
-            # Inisialisasi variabel untuk melacak karakter dan jumlah kemunculannya dalam kata
-            char_count = Counter(word)
-            # Periksa apakah kata memiliki dua atau lebih huruf yang sama berturut-turut
-            if has_consecutive_letters(word):
-                st.warning(f"Kata '{word}' memiliki dua atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
-            # Periksa apakah kata tidak memiliki huruf vokal
-            if not has_vowel(word):
-                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
-        # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
-        if english_word_count > indonesian_word_count:
-            st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
-                
-        inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
+# Membuat form
+with st.form(key='my_form'):
+    # Jika tombol ditekan, lakukan analisis awal
+    if st.form_submit_button("ANALISIS"):
+        # Cek apakah input memiliki lebih dari 7 kata
+        if len(user_input.split()) > 7:
+            # Variabel untuk menghitung jumlah kata dalam bahasa Inggris dan Indonesia
+            english_word_count = 0
+            indonesian_word_count = 0
+            # Cek bahasa setiap kata dalam input
+            for word in user_input.split():
+                # Cek bahasa dari kata menggunakan library langdetect
+                lang = detect(word)
+                if lang == 'en':
+                    english_word_count += 1
+                elif lang == 'id':
+                    indonesian_word_count += 1
+                # Inisialisasi variabel untuk melacak karakter dan jumlah kemunculannya dalam kata
+                char_count = Counter(word)
+                # Periksa apakah kata memiliki dua atau lebih huruf yang sama berturut-turut
+                if has_consecutive_letters(word):
+                    st.warning(f"Kata '{word}' memiliki dua atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
+                # Periksa apakah kata tidak memiliki huruf vokal
+                if not has_vowel(word):
+                    st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
+            # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
+            if english_word_count > indonesian_word_count:
+                st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
+                    
+            inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
-        # Forward pass through classification layers for model1 and model2
-        output1 = model1(**inputs)
-        output2 = model2(**inputs)
+            # Forward pass through classification layers for model1 and model2
+            output1 = model1(**inputs)
+            output2 = model2(**inputs)
 
-        logits1 = output1.logits
-        logits2 = output2.logits
+            logits1 = output1.logits
+            logits2 = output2.logits
 
-        # Get the index and probability of the highest predicted sentiment and emotion
-        max_sentiment_index = torch.argmax(logits1, dim=1).item()
-        max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
+            # Get the index and probability of the highest predicted sentiment and emotion
+            max_sentiment_index = torch.argmax(logits1, dim=1).item()
+            max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
 
-        max_emotion_index = torch.argmax(logits2, dim=1).item()
-        max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+            max_emotion_index = torch.argmax(logits2, dim=1).item()
+            max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
-        # Display the highest predicted sentiment and emotion along with their scores
-        st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
-        st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
-    else:
-        st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
+            # Display the highest predicted sentiment and emotion along with their scores
+            st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
+            st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
+        else:
+            st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
 
-
-# Jika tombol reset ditekan, hapus input dan hasil sebelumnya
-if reset_button:
-    user_input = ''
+    # Jika tombol reset ditekan, hapus input dan hasil sebelumnya
+    if st.form_submit_button("RESET"):
+        user_input = ''
