@@ -31,9 +31,7 @@ note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
 note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
 button = st.button("ANALISIS")
 reset_button = st.button("RESET")
-# Jika tombol reset ditekan, hapus input dan hasil sebelumnya
-if reset_button:
-    user_input = ''
+
     
 sentimen = {
   2:'Positif',  
