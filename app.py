@@ -63,20 +63,6 @@ if user_input and button:
                 analyze_button = st.button("Lakukan Analisis")
                 if analyze_button:
                     st.write("Analisis dimulai...")
-                    # Lakukan analisis di sini
-            else:
-                st.info("Silakan ubah input Anda jika perlu.")
-        else:
-            st.success("Semua kata memiliki huruf vokal. Anda dapat melanjutkan dengan analisis.")
-            analyze_button = st.button("Lakukan Analisis")
-            if analyze_button:
-                st.write("Analisis dimulai...")
-                # Lakukan analisis di sini
-
-# Tambahan lain, tampilkan informasi instruksi jika input belum dimasukkan
-if not user_input:
-    st.info("Masukkan teks Anda di atas dan tekan 'Analisis' untuk memulai.")
-Cara Kerja Kode:
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
