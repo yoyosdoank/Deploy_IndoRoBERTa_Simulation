@@ -53,55 +53,52 @@ with st.form(key='my_form'):
     reset_button = st.form_submit_button("RESET")
 
     if button and user_input:
-        # Cek apakah input memiliki lebih dari 7 kata
         if len(user_input.split()) > 7:
-            # Variabel untuk menghitung jumlah kata dalam bahasa Inggris dan Indonesia
             english_word_count = 0
             indonesian_word_count = 0
-            # Cek bahasa setiap kata dalam input
+            warning_count = 0
             for word in user_input.split():
                 try:
-                    # Cek bahasa dari kata menggunakan library langdetect
                     lang = detect(word)
                     if lang == 'en':
                         english_word_count += 1
                     elif lang == 'id':
                         indonesian_word_count += 1
-                    # Periksa apakah kata memiliki dua atau lebih huruf yang sama berturut-turut
                     if has_consecutive_letters(word):
                         st.warning(f"Kata '{word}' memiliki dua atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
-                    # Periksa apakah kata tidak memiliki huruf vokal
+                        warning_count += 1
                     if not has_vowel(word):
                         st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
+                        warning_count += 1
                 except LangDetectException:
                     st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
-            # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
-            if english_word_count > indonesian_word_count:
-                st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
+                    warning_count += 1
 
-            inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
+            if warning_count > 5:
+                st.error("Warning lebih dari 5, harap periksa kembali kalimat keseluruhan.")
+            else:
+                if english_word_count > indonesian_word_count:
+                    st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
 
-            # Forward pass through classification layers for model1 and model2
-            output1 = model1(**inputs)
-            output2 = model2(**inputs)
+                inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
-            logits1 = output1.logits
-            logits2 = output2.logits
+                output1 = model1(**inputs)
+                output2 = model2(**inputs)
 
-            # Get the index and probability of the highest predicted sentiment and emotion
-            max_sentiment_index = torch.argmax(logits1, dim=1).item()
-            max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
+                logits1 = output1.logits
+                logits2 = output2.logits
 
-            max_emotion_index = torch.argmax(logits2, dim=1).item()
-            max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+                max_sentiment_index = torch.argmax(logits1, dim=1).item()
+                max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
 
-            # Display the highest predicted sentiment and emotion along with their scores
-            st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
-            st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
+                max_emotion_index = torch.argmax(logits2, dim=1).item()
+                max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+
+                st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
+                st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
         else:
             st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
 
-    # Jika tombol reset ditekan, hapus input dan hasil sebelumnya
     if reset_button:
         st.experimental_rerun()
 
