@@ -47,7 +47,7 @@ emosi = {
 }
 
 # Membuat form
-user_input = st.text_area('**MASUKKAN KALIMAT DARI MEDIA SOSIAL ATAU LAINNYA:**')
+user_input = st.text_area('**MASUKKAN KALIMAT:**')
 with st.form(key='my_form'):
     button = st.form_submit_button("ANALISIS")
     reset_button = st.form_submit_button("RESET")
@@ -75,7 +75,7 @@ with st.form(key='my_form'):
                     warning_count += 1
 
             if warning_count > 5:
-                st.error("Warning lebih dari 5, harap periksa kembali kalimat keseluruhan.")
+                st.error("Warning lebih dari 5, analisis prediksi dihentikan, perbaiki kembali kalimat Anda.")
             else:
                 if english_word_count > indonesian_word_count:
                     st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
