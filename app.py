@@ -54,7 +54,7 @@ if user_input and button:
         for word in user_input.split():
             if not has_vowel(word):
                 words_without_vowels.append(word)
-                st.warning(f"Kata '{word}' tidak memiliki huruf vokal.")
+                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks.")
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
