@@ -51,14 +51,9 @@ user_input = st.text_area('**MASUKKAN KALIMAT DARI MEDIA SOSIAL ATAU LAINNYA:**'
 with st.form(key='my_form'):
     # Jika tombol ditekan, lakukan analisis awal
     if st.form_submit_button("ANALISIS"):
-        # Cek apakah input memiliki lebih dari 7 kata
-        if len(user_input.split()) > 7:
-            # Variabel untuk menghitung jumlah kata dalam bahasa Inggris dan Indonesia
-            english_word_count = 0
-            indonesian_word_count = 0
-            # Cek bahasa setiap kata dalam input
-            for word in user_input.split():
-                try:
+        # Cek bahasa setiap kata dalam input
+        for word in user_input.split():
+            try:
                 # Cek bahasa dari kata menggunakan library langdetect
                 lang = detect(word)
                 if lang == 'en':
@@ -73,7 +68,7 @@ with st.form(key='my_form'):
                 # Periksa apakah kata tidak memiliki huruf vokal
                 if not has_vowel(word):
                     st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
-            except:
+            except LangDetectException:
                 st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
         # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
         if english_word_count > indonesian_word_count:
