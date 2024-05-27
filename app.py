@@ -40,18 +40,13 @@ emosi = {
 }
 
 # Jika tombol ditekan, lakukan analisis
-if len(user_input.split()) > 7:
-        words_without_vowel = []
+if user_input and button:
+    # Cek apakah input memiliki lebih dari 7 kata
+    if len(user_input.split()) > 7:
         # Cek apakah setiap kata dalam input memiliki huruf vokal
         for word in user_input.split():
             if not has_vowel(word):
-                words_without_vowel.append(word)
-        
-        if words_without_vowel:
-            st.warning(f"Kata-kata {', '.join(words_without_vowel)} tidak memiliki huruf vokal.")
-            continue_analysis = st.radio("Apakah Anda ingin melanjutkan analisis meskipun ada kata-kata tanpa huruf vokal?", ("Ya", "Tidak"))
-            if continue_analysis == "Tidak":
-                st.stop()
+                st.warning(f"Kata '{word}' tidak memiliki huruf vokal.")
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
