@@ -99,4 +99,3 @@ if user_input and button:
 # Jika tombol reset ditekan, hapus input dan hasil sebelumnya
 if reset_button:
     user_input = ''
-
