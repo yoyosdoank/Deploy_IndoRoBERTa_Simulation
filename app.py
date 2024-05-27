@@ -19,7 +19,7 @@ def get_model():
 
 tokenizer,model1,model2 = get_model()
 
-st.image("https://github.com/yoyosdoank/FineTune_IndoRoBERTa_Model/blob/main/banner_edit.pngg", use_column_width=True)
+st.image("banner_edit.png", use_column_width=True)
 header = st.title("Prediksi Sentimen & Emosi Pada Kalimat Berbahasa Indonesia Dengan Metode Transformers")
 note1 = st.caption("**AUTHOR: YOGIE OKTAVIANUS SIHOMBING**")
 note2 = st.write("SENTIMEN adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. EMOSI adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat. ***-Ivanov, D. (2023)-.***")
