@@ -102,7 +102,6 @@ with st.form(key='my_form'):
     if reset_button:
         st.experimental_rerun()
 
-# Apply custom CSS for button colors
 st.markdown("""
     <style>
     div.stButton > button:first-child {
@@ -112,6 +111,13 @@ st.markdown("""
     div.stButton > button:last-child {
         background-color: red;
         color: white;
+    }
+    .stTextArea textarea {
+        border: 2px solid blue;
+    }
+    .stForm {
+        border: 2px solid blue;
+        padding: 1em;
     }
     </style>
     """, unsafe_allow_html=True)
