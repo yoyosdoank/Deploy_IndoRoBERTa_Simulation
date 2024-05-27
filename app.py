@@ -21,7 +21,7 @@ note1 = st.caption("**AUTHOR: YOGIE OKTAVIANUS SIHOMBING**")
 note2 = st.caption("**Sentimen** adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. **Emosi** adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat. -Ivanov, D. (2023).")
 st.info("*Info: Masukkan kalimat Anda di kolom bawah dan tekan 'Lakukan Analisis' untuk memulai.")
 user_input = st.text_area('Inputkan Kalimat:')
-note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 5 kata dalam 1 kalimat.***")
+note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***")
 note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
 note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
 note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
@@ -47,7 +47,7 @@ emosi = {
 # Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
-    if len(user_input.split()) > 5:
+    if len(user_input.split()) > 7:
         # Variabel untuk melacak apakah ada kata tanpa vokal
         words_without_vowels = []
         # Cek apakah setiap kata dalam input memiliki huruf vokal
@@ -76,5 +76,5 @@ if user_input and button:
         st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
         st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
     else:
-        st.error("Panjang 1 kalimat disarankan lebih dari 5 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
+        st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
     
