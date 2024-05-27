@@ -69,7 +69,7 @@ if user_input and button:
                 st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks.")
         # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
         if english_word_count > indonesian_word_count:
-            st.warning("Kalimat ini memiliki lebih banyak kata dalam bahasa Inggris daripada bahasa Indonesia.")
+            st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
