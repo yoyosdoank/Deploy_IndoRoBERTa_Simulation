@@ -37,22 +37,26 @@ emosi = {
 
 # Jika tombol ditekan, lakukan analisis
 if user_input and button:
-    inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
+    # Cek apakah input memiliki lebih dari 7 kata
+    if len(user_input.split()) > 7:
+        inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
-    # Forward pass through classification layers for model1 and model2
-    output1 = model1(**inputs)
-    output2 = model2(**inputs)
+        # Forward pass through classification layers for model1 and model2
+        output1 = model1(**inputs)
+        output2 = model2(**inputs)
 
-    logits1 = output1.logits
-    logits2 = output2.logits
+        logits1 = output1.logits
+        logits2 = output2.logits
 
-    # Get the index and probability of the highest predicted sentiment and emotion
-    max_sentiment_index = torch.argmax(logits1, dim=1).item()
-    max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
+        # Get the index and probability of the highest predicted sentiment and emotion
+        max_sentiment_index = torch.argmax(logits1, dim=1).item()
+        max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
 
-    max_emotion_index = torch.argmax(logits2, dim=1).item()
-    max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+        max_emotion_index = torch.argmax(logits2, dim=1).item()
+        max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
-    # Display the highest predicted sentiment and emotion along with their scores
-    st.write("Klasifikasi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Tingkat Akurasi:", f"**{max_sentiment_prob:.2%}**")
-    st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
+        # Display the highest predicted sentiment and emotion along with their scores
+        st.write("Klasifikasi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Tingkat Akurasi:", f"**{max_sentiment_prob:.2%}**")
+        st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
+    else:
+        st.error("Panjang kalimat harus lebih dari 7 kata untuk melakukan analisis.")
