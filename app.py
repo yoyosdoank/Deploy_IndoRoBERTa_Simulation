@@ -18,7 +18,7 @@ tokenizer,model1,model2 = get_model()
 
 header = st.header("Prediksi Sentimen & Emosi Pada Kalimat Berbahasa Indonesia Dengan Metode Transformers")
 note1 = st.caption("**AUTHOR: YOGIE OKTAVIANUS SIHOMBING**")
-note2 = st.caption("**Sentimen** adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. **Emosi** adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat. ***-Ivanov, D. (2023)-***".")
+note2 = st.caption("SENTIMEN adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. EMOSI adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat. ***-Ivanov, D. (2023)-.***")
 st.info("*Info: Masukkan kalimat Anda di kolom bawah dan tekan 'Lakukan Analisis' untuk memulai.")
 user_input = st.text_area('Inputkan Kalimat:')
 note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***")
