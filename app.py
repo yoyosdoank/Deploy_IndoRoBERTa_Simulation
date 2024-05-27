@@ -2,21 +2,12 @@ import streamlit as st
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
+from langdetect import detect
 from collections import Counter
-import spacy
 
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
     return any(char in vowels for char in word)
-
-# Function to detect the language of a word
-def detect_language(word):
-    if nlp_en(word).vocab.lang == 'en':
-        return 'en'
-    elif nlp_id(word).vocab.lang == 'id':
-        return 'id'
-    else:
-        return None
 
 @st.cache_resource()
 def get_model():
@@ -24,10 +15,6 @@ def get_model():
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-for-Twitter", token="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")
     return tokenizer,model1,model2
-
-# Load the language models for English and Indonesian
-nlp_en = spacy.load("en_core_web_sm")
-nlp_id = spacy.load("id_core_news_sm")
 
 tokenizer,model1,model2 = get_model()
 
@@ -42,23 +29,6 @@ note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
 note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
 button = st.button("Lakukan Analisis")
 
-# Variabel untuk menyimpan status konfirmasi
-confirm = False
-
-sentimen = {
-  2:'Positif',  
-  1:'Netral',
-  0:'Negatif'
-}
-
-emosi = {
-  4:'Sedih - Kecewa',
-  3:'Sayang',
-  2:'Senang - Bahagia',  
-  1:'Takut - Khawatir',
-  0:'Marah - Jijik'
-}
-
 # Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
@@ -68,8 +38,8 @@ if user_input and button:
         indonesian_word_count = 0
         # Cek bahasa setiap kata dalam input
         for word in user_input.split():
-            # Cek bahasa dari kata
-            lang = detect_language(word)
+            # Cek bahasa dari kata menggunakan library langdetect
+            lang = detect(word)
             if lang == 'en':
                 english_word_count += 1
             elif lang == 'id':
@@ -107,4 +77,3 @@ if user_input and button:
         st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
-    
