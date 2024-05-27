@@ -97,10 +97,10 @@ if user_input and button:
     else:
         st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
 
-# Tampilkan hasil prediksi jika ada
-if predicted_sentiment is not None and predicted_emotion is not None:
-    st.write("Sentimen:", f"**{predicted_sentiment}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
-    st.write("Emosi:", f"**{predicted_emotion}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
+    # Tampilkan hasil prediksi jika ada
+    if predicted_sentiment is not None and predicted_emotion is not None:
+        st.write("Sentimen:", f"**{predicted_sentiment}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
+        st.write("Emosi:", f"**{predicted_emotion}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
 
 # Jika tombol reset ditekan, reset input dan hasil
 if reset_button:
