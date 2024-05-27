@@ -53,16 +53,6 @@ if user_input and button:
             if not has_vowel(word):
                 words_without_vowels.append(word)
                 st.warning(f"Kata '{word}' tidak memiliki huruf vokal.")
-        
-        # Jika ada kata tanpa vokal, minta konfirmasi pengguna
-        if words_without_vowels:
-            confirm = st.checkbox("Beberapa kata tidak memiliki huruf vokal. Apakah Anda ingin melanjutkan dengan input ini?")
-            
-            if confirm:
-                st.success("Pengguna telah mengonfirmasi untuk melanjutkan.")
-                analyze_button = st.button("Lakukan Analisis")
-                if analyze_button:
-                    st.write("Analisis dimulai...")
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
@@ -85,3 +75,5 @@ if user_input and button:
         st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang kalimat harus lebih dari 5 kata untuk melakukan analisis konteks dalam kalimat.")
+    if not user_input:
+        st.info("Masukkan teks Anda di atas dan tekan 'Analisis' untuk memulai.")
