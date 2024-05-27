@@ -9,12 +9,25 @@ def has_vowel(word):
     vowels = 'aeiouAEIOU'
     return any(char in vowels for char in word)
 
+# Function to detect the language of a word
+def detect_language(word):
+    if nlp_en(word).vocab.lang == 'en':
+        return 'en'
+    elif nlp_id(word).vocab.lang == 'id':
+        return 'id'
+    else:
+        return None
+
 @st.cache_resource()
 def get_model():
     tokenizer = AutoTokenizer.from_pretrained('flax-community/indonesian-roberta-base')
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-for-Twitter", token="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")
     return tokenizer,model1,model2
+
+# Load the language models for English and Indonesian
+nlp_en = spacy.load("en_core_web_sm")
+nlp_id = spacy.load("id_core_news_sm")
 
 tokenizer,model1,model2 = get_model()
 
@@ -50,15 +63,13 @@ emosi = {
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
     if len(user_input.split()) > 7:
-        # Variabel untuk melacak kata-kata yang memenuhi kriteria
-        problematic_words = []
         # Variabel untuk menghitung jumlah kata dalam bahasa Inggris dan Indonesia
         english_word_count = 0
         indonesian_word_count = 0
         # Cek bahasa setiap kata dalam input
         for word in user_input.split():
-            # Cek bahasa dari kata menggunakan library langdetect
-            lang = detect(word)
+            # Cek bahasa dari kata
+            lang = detect_language(word)
             if lang == 'en':
                 english_word_count += 1
             elif lang == 'id':
@@ -67,11 +78,9 @@ if user_input and button:
             char_count = Counter(word)
             # Periksa apakah ada karakter dengan kemunculan lebih dari 2
             if any(count > 2 for count in char_count.values()):
-                problematic_words.append(word)
                 st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks.")
             # Periksa apakah kata tidak memiliki huruf vokal
             if not has_vowel(word):
-                problematic_words.append(word)
                 st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks.")
         # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
         if english_word_count > indonesian_word_count:
