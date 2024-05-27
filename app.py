@@ -102,6 +102,20 @@ with st.form(key='my_form'):
     if reset_button:
         st.experimental_rerun()
 
+# Apply custom CSS for button colors
+st.markdown("""
+    <style>
+    div.stButton > button:first-child {
+        background-color: green;
+        color: white;
+    }
+    div.stButton > button:last-child {
+        background-color: red;
+        color: white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***")
 note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
 note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
