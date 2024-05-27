@@ -2,7 +2,6 @@ import streamlit as st
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
-from langdetect import detect
 from collections import Counter
 import os
 import subprocess
