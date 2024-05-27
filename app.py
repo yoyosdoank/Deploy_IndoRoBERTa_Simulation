@@ -75,5 +75,5 @@ if user_input and button:
         st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang kalimat harus lebih dari 5 kata untuk melakukan analisis konteks dalam kalimat.")
-    if not user_input:
-        st.info("Masukkan teks Anda di atas dan tekan 'Analisis' untuk memulai.")
+if not user_input:
+    st.info("Masukkan teks Anda di atas dan tekan 'Analisis' untuk memulai.")
