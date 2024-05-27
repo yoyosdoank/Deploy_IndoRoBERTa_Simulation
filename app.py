@@ -30,10 +30,7 @@ header = st.title("Prediksi Sentimen & Emosi Untuk Media Sosial Berbasis Teks Ba
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
 note2 = st.write("SENTIMEN adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. EMOSI adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat. ***- Ivanov, D. (2023) -***")
 st.info("Masukkan kalimat Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediksi. Tekan 'RESET' untuk atur ulang halaman.")
-note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***")
-note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
-note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
-note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
+
 
 sentimen = {
   2:'Positif',  
@@ -104,3 +101,8 @@ with st.form(key='my_form'):
     # Jika tombol reset ditekan, hapus input dan hasil sebelumnya
     if st.form_submit_button("RESET"):
         user_input = ''
+
+note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***")
+note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
+note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
+note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
