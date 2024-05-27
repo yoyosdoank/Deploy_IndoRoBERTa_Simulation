@@ -44,44 +44,58 @@ emosi = {
 
 # Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
-    # Cek apakah input memiliki lebih dari 7 kata
     if len(user_input.split()) > 7:
-        # Variabel untuk melacak apakah ada kata tanpa vokal
         words_without_vowels = []
-        # Cek apakah setiap kata dalam input memiliki huruf vokal
         for word in user_input.split():
             if not has_vowel(word):
                 words_without_vowels.append(word)
                 st.warning(f"Kata '{word}' tidak memiliki huruf vokal.")
-        
-        # Jika ada kata tanpa vokal, minta konfirmasi pengguna
+
         if words_without_vowels:
             confirm = st.checkbox("Beberapa kata tidak memiliki huruf vokal. Apakah Anda ingin melanjutkan dengan input ini?")
             
             if confirm:
-                st.success("Pengguna telah mengonfirmasi untuk melanjutkan.")
-                analyze_button = st.button("Lakukan Analisis")
-                if analyze_button:
-                    st.write("Analisis dimulai...")
-                
-        inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
+                st.warning("Pengguna telah mengonfirmasi untuk melanjutkan.")
+                if st.button("Lakukan Analisis"):
+                    inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
-        # Forward pass through classification layers for model1 and model2
-        output1 = model1(**inputs)
-        output2 = model2(**inputs)
+                    output1 = model1(**inputs)
+                    output2 = model2(**inputs)
 
-        logits1 = output1.logits
-        logits2 = output2.logits
+                    logits1 = output1.logits
+                    logits2 = output2.logits
 
-        # Get the index and probability of the highest predicted sentiment and emotion
-        max_sentiment_index = torch.argmax(logits1, dim=1).item()
-        max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
+                    max_sentiment_index = torch.argmax(logits1, dim=1).item()
+                    max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
 
-        max_emotion_index = torch.argmax(logits2, dim=1).item()
-        max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+                    max_emotion_index = torch.argmax(logits2, dim=1).item()
+                    max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
-        # Display the highest predicted sentiment and emotion along with their scores
-        st.write("Klasifikasi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Tingkat Akurasi:", f"**{max_sentiment_prob:.2%}**")
-        st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
+                    st.write("Klasifikasi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Tingkat Akurasi:", f"**{max_sentiment_prob:.2%}**")
+                    st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
+            else:
+                st.info("Silakan ubah input Anda jika perlu.")
+        else:
+            st.success("Semua kata memiliki huruf vokal. Anda dapat melanjutkan dengan analisis.")
+            if st.button("Lakukan Analisis"):
+                inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
+
+                output1 = model1(**inputs)
+                output2 = model2(**inputs)
+
+                logits1 = output1.logits
+                logits2 = output2.logits
+
+                max_sentiment_index = torch.argmax(logits1, dim=1).item()
+                max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
+
+                max_emotion_index = torch.argmax(logits2, dim=1).item()
+                max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+
+                st.write("Klasifikasi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Tingkat Akurasi:", f"**{max_sentiment_prob:.2%}**")
+                st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang kalimat harus lebih dari 5 kata untuk melakukan analisis konteks dalam kalimat.")
+
+if not user_input:
+    st.info("Masukkan teks Anda di atas dan tekan 'Analisis' untuk memulai.")
