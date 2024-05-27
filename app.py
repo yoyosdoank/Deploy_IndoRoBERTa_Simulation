@@ -39,7 +39,12 @@ emosi = {
 # Jika tombol ditekan, lakukan analisis
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
-    if len(user_input.split()) > 5:
+    if len(user_input.split()) > 7:
+        # Cek apakah setiap kata dalam input memiliki huruf vokal
+        for word in user_input.split():
+            if not has_vowel(word):
+                st.warning(f"Kata '{word}' tidak memiliki huruf vokal.")
+                
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
         # Forward pass through classification layers for model1 and model2
