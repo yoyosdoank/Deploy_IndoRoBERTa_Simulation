@@ -5,6 +5,7 @@ import torch
 from collections import Counter
 import os
 from polyglot.detect import Detector
+from langdetect import detect 
 
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
