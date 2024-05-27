@@ -30,6 +30,7 @@ note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
 note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
 note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
 button = st.button("Lakukan Analisis")
+reset_button = st.button("Reset")
 
 sentimen = {
   2:'Positif',  
@@ -93,3 +94,6 @@ if user_input and button:
         st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
+# Jika tombol reset ditekan, hapus input dan hasil sebelumnya
+if reset_button:
+    user_input = ''
