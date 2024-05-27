@@ -112,9 +112,6 @@ st.markdown("""
         background-color: red;
         color: white;
     }
-    .stTextArea textarea {
-        border: 2px solid blue;
-    }
     .stForm {
         border: 2px solid blue;
         padding: 1em;
