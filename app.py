@@ -76,5 +76,5 @@ if user_input and button:
         st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
         st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "- Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
     else:
-        st.error("Panjang kalimat harus lebih dari 5 kata untuk melakukan analisis konteks dalam kalimat.")
+        st.error("Panjang 1 kalimat disarankan lebih dari 5 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
     
