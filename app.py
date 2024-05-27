@@ -25,6 +25,9 @@ note5 = st.caption("*Dimungkinkan analisis dari media sosial lainnya.")
 note6 = st.caption("*Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.")
 button = st.button("Lakukan Analisis")
 
+# Variabel untuk menyimpan status konfirmasi
+confirm = False
+
 sentimen = {
   2:'Positif',  
   1:'Netral',
@@ -39,14 +42,41 @@ emosi = {
   0:'Marah / Jijik'
 }
 
-# Jika tombol ditekan, lakukan analisis
+# Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
     if len(user_input.split()) > 7:
+        # Variabel untuk melacak apakah ada kata tanpa vokal
+        words_without_vowels = []
         # Cek apakah setiap kata dalam input memiliki huruf vokal
         for word in user_input.split():
             if not has_vowel(word):
+                words_without_vowels.append(word)
                 st.warning(f"Kata '{word}' tidak memiliki huruf vokal.")
+        
+        # Jika ada kata tanpa vokal, minta konfirmasi pengguna
+        if words_without_vowels:
+            confirm = st.checkbox("Beberapa kata tidak memiliki huruf vokal. Apakah Anda ingin melanjutkan dengan input ini?")
+            
+            if confirm:
+                st.success("Pengguna telah mengonfirmasi untuk melanjutkan.")
+                analyze_button = st.button("Lakukan Analisis")
+                if analyze_button:
+                    st.write("Analisis dimulai...")
+                    # Lakukan analisis di sini
+            else:
+                st.info("Silakan ubah input Anda jika perlu.")
+        else:
+            st.success("Semua kata memiliki huruf vokal. Anda dapat melanjutkan dengan analisis.")
+            analyze_button = st.button("Lakukan Analisis")
+            if analyze_button:
+                st.write("Analisis dimulai...")
+                # Lakukan analisis di sini
+
+# Tambahan lain, tampilkan informasi instruksi jika input belum dimasukkan
+if not user_input:
+    st.info("Masukkan teks Anda di atas dan tekan 'Analisis' untuk memulai.")
+Cara Kerja Kode:
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
