@@ -36,19 +36,24 @@ emosi = {
   0:'Marah / Jijik'
 }
 
-if user_input and button :
-    test_sample = tokenizer([user_input], padding=True, truncation=True, max_length=512,return_tensors='pt')
-    # test_sample
-    
-    output1 = model1(**test_sample)
-    output2 = model2(**test_sample)
-    probs1 = output1[0].softmax(1)
-    probs2 = output2[0].softmax(1)
-    pred_label_idx1 = probs1.argmax()
-    pred_label_idx2 = probs2.argmax()
-    st.write("Label Sentimen: ",pred_label_idx1)
-    st.write("Label Emosi: ",pred_label_idx2)
-    y_pred1 = np.argmax(output1.logits.detach().numpy(),axis=1)
-    y_pred2 = np.argmax(output2.logits.detach().numpy(),axis=1)
-    st.write("Klasifikasi Sentimen: ",sentimen[y_pred1[0]])
-    st.write("Klasifikasi Emosi: ",emosi[y_pred2[0]])
+# Jika tombol ditekan, lakukan analisis
+if user_input and button:
+    inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
+
+    # Forward pass through classification layers for model1 and model2
+    output1 = model1(**inputs)
+    output2 = model2(**inputs)
+
+    logits1 = output1.logits
+    logits2 = output2.logits
+
+    # Get the index and probability of the highest predicted sentiment and emotion
+    max_sentiment_index = torch.argmax(logits1, dim=1).item()
+    max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
+
+    max_emotion_index = torch.argmax(logits2, dim=1).item()
+    max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+
+    # Display the highest predicted sentiment and emotion along with their scores
+    st.write("Prediksi Sentimen:", d[max_sentiment_index], "- Skor:", f"{max_sentiment_prob:.2%}")
+    st.write("Prediksi Emosi:", e[max_emotion_index], "- Skor:", f"{max_emotion_prob:.2%}")
