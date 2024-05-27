@@ -10,6 +10,12 @@ def has_vowel(word):
     vowels = 'aeiouAEIOU'
     return any(char in vowels for char in word)
 
+def has_consecutive_letters(word):
+    for i in range(len(word) - 1):
+        if word[i] == word[i+1]:
+            return True
+    return False
+
 @st.cache_resource()
 def get_model():
     tokenizer = AutoTokenizer.from_pretrained('flax-community/indonesian-roberta-base')
@@ -64,9 +70,9 @@ if user_input and button:
                 indonesian_word_count += 1
             # Inisialisasi variabel untuk melacak karakter dan jumlah kemunculannya dalam kata
             char_count = Counter(word)
-            # Periksa apakah ada karakter dengan kemunculan lebih dari 2
-            if any(count > 2 for count in char_count.values()):
-                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
+            # Periksa apakah kata memiliki dua atau lebih huruf yang sama berturut-turut
+            if has_consecutive_letters(word):
+                st.warning(f"Kata '{word}' memiliki dua atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
             # Periksa apakah kata tidak memiliki huruf vokal
             if not has_vowel(word):
                 st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
