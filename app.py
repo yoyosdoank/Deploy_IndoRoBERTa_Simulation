@@ -4,7 +4,6 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from collections import Counter
 import os
-import subprocess
 
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
