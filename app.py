@@ -47,7 +47,7 @@ emosi = {
 # Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
-    if len(user_input.split()) > 7:
+    if len(user_input.split()) > 5:
         # Variabel untuk melacak apakah ada kata tanpa vokal
         words_without_vowels = []
         # Cek apakah setiap kata dalam input memiliki huruf vokal
@@ -73,8 +73,8 @@ if user_input and button:
         max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
         # Display the highest predicted sentiment and emotion along with their scores
-        st.write("Klasifikasi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Tingkat Akurasi:", f"**{max_sentiment_prob:.2%}**")
-        st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
+        st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
+        st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "- Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
     else:
         st.error("Panjang kalimat harus lebih dari 5 kata untuk melakukan analisis konteks dalam kalimat.")
     
