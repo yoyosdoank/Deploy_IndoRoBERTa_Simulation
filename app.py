@@ -4,7 +4,6 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from collections import Counter
 import os
-from polyglot.detect import Detector
 from langdetect import detect 
 
 def has_vowel(word):
