@@ -58,10 +58,8 @@ with st.form(key='my_form'):
             indonesian_word_count = 0
             # Cek bahasa setiap kata dalam input
             for word in user_input.split():
-                # Cek panjang kata minimal 3 karakter
-                if len(word) >= 3:
                 # Cek bahasa dari kata menggunakan library langdetect
-                    lang = detect(word)
+                lang = detect(word)
                 if lang == 'en':
                     english_word_count += 1
                 elif lang == 'id':
