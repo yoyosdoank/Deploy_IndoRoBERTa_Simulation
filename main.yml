@@ -1,0 +1,22 @@
+name: Download Polyglot Models
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download_models:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install Polyglot
+      run: pip install polyglot
+
+    - name: Download Models
+      run: python setup.py
