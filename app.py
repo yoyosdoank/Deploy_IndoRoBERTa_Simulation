@@ -39,7 +39,6 @@ emosi = {
   0:'Marah / Jijik'
 }
 
-# Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
     if len(user_input.split()) > 7:
         words_without_vowels = []
@@ -50,10 +49,10 @@ if user_input and button:
 
         if words_without_vowels:
             confirm = st.checkbox("Beberapa kata tidak memiliki huruf vokal. Apakah Anda ingin melanjutkan dengan input ini?")
-            
+
             if confirm:
                 st.warning("Pengguna telah mengonfirmasi untuk melanjutkan.")
-                if st.button("Lakukan Analisis"):
+                if st.button("Konfirmasi Analisis"):
                     inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
                     output1 = model1(**inputs)
@@ -74,7 +73,7 @@ if user_input and button:
                 st.info("Silakan ubah input Anda jika perlu.")
         else:
             st.success("Semua kata memiliki huruf vokal. Anda dapat melanjutkan dengan analisis.")
-            if st.button("Lakukan Analisis"):
+            if st.button("Konfirmasi Analisis"):
                 inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
                 output1 = model1(**inputs)
