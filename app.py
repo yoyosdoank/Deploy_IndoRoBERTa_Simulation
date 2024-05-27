@@ -49,32 +49,36 @@ emosi = {
 # Membuat form
 user_input = st.text_area('**MASUKKAN KALIMAT DARI MEDIA SOSIAL ATAU LAINNYA:**')
 with st.form(key='my_form'):
-    # Jika tombol ditekan, lakukan analisis awal
-    if st.form_submit_button("ANALISIS"):
-        # Cek bahasa setiap kata dalam input
-        for word in user_input.split():
-            try:
-                # Cek bahasa dari kata menggunakan library langdetect
-                lang = detect(word)
-                if lang == 'en':
-                    english_word_count += 1
-                elif lang == 'id':
-                    indonesian_word_count += 1
-                # Inisialisasi variabel untuk melacak karakter dan jumlah kemunculannya dalam kata
-                char_count = Counter(word)
-                # Periksa apakah kata memiliki dua atau lebih huruf yang sama berturut-turut
-                if has_consecutive_letters(word):
-                    st.warning(f"Kata '{word}' memiliki dua atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
-                # Periksa apakah kata tidak memiliki huruf vokal
-                if not has_vowel(word):
-                    st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
-            except LangDetectException:
-                st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
-        # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
-        if english_word_count > indonesian_word_count:
-            st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
+    button = st.form_submit_button("ANALISIS")
+    reset_button = st.form_submit_button("RESET")
 
-                    
+    if button and user_input:
+        # Cek apakah input memiliki lebih dari 7 kata
+        if len(user_input.split()) > 7:
+            # Variabel untuk menghitung jumlah kata dalam bahasa Inggris dan Indonesia
+            english_word_count = 0
+            indonesian_word_count = 0
+            # Cek bahasa setiap kata dalam input
+            for word in user_input.split():
+                try:
+                    # Cek bahasa dari kata menggunakan library langdetect
+                    lang = detect(word)
+                    if lang == 'en':
+                        english_word_count += 1
+                    elif lang == 'id':
+                        indonesian_word_count += 1
+                    # Periksa apakah kata memiliki dua atau lebih huruf yang sama berturut-turut
+                    if has_consecutive_letters(word):
+                        st.warning(f"Kata '{word}' memiliki dua atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
+                    # Periksa apakah kata tidak memiliki huruf vokal
+                    if not has_vowel(word):
+                        st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
+                except LangDetectException:
+                    st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
+            # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
+            if english_word_count > indonesian_word_count:
+                st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
+
             inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
             # Forward pass through classification layers for model1 and model2
@@ -98,8 +102,8 @@ with st.form(key='my_form'):
             st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
 
     # Jika tombol reset ditekan, hapus input dan hasil sebelumnya
-    if st.form_submit_button("RESET"):
-        user_input = ''
+    if reset_button:
+        st.experimental_rerun()
 
 note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***")
 note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
