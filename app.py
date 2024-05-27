@@ -55,5 +55,5 @@ if user_input and button:
     max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
     # Display the highest predicted sentiment and emotion along with their scores
-    st.write("Prediksi Sentimen:", sentimen[max_sentiment_index], "- Skor:", f"{max_sentiment_prob:.2%}")
-    st.write("Prediksi Emosi:", emosi[max_emotion_index], "- Skor:", f"{max_emotion_prob:.2%}")
+    st.write("Prediksi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Skor:", f"**{max_sentiment_prob:.2%}**")
+    st.write("Prediksi Emosi:", f"**{emosi[max_emotion_index]}**", "- Skor:", f"{max_emotion_prob:.2%}")
