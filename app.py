@@ -38,7 +38,7 @@ emosi = {
 # Jika tombol ditekan, lakukan analisis
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
-    if len(user_input.split()) > 7:
+    if len(user_input.split()) > 5:
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
         # Forward pass through classification layers for model1 and model2
@@ -59,4 +59,4 @@ if user_input and button:
         st.write("Klasifikasi Sentimen:", f"**{sentimen[max_sentiment_index]}**", "- Tingkat Akurasi:", f"**{max_sentiment_prob:.2%}**")
         st.write("Klasifikasi Emosi:", f"**{emosi[max_emotion_index]}**", "- Tingkat Akurasi:", f"**{max_emotion_prob:.2%}**")
     else:
-        st.error("Panjang kalimat harus lebih dari 7 kata untuk melakukan analisis.")
+        st.error("Panjang kalimat harus lebih dari 5 kata untuk melakukan analisis konteks dalam kalimat.")
