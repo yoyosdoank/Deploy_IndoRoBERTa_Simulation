@@ -2,3 +2,4 @@ streamlit
 torch
 transformers
 polyglot
+langdetect==1.0.9
