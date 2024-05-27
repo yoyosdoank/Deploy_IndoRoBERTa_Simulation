@@ -44,17 +44,22 @@ emosi = {
   0:'Marah - Jijik'
 }
 
-# Jika tombol ditekan, lakukan analisis awal
 if user_input and button:
     # Cek apakah input memiliki lebih dari 7 kata
     if len(user_input.split()) > 7:
-        # Variabel untuk melacak apakah ada kata tanpa vokal
-        words_without_vowels = []
+        # Variabel untuk melacak kata-kata yang memenuhi kriteria
+        problematic_words = []
         # Cek apakah setiap kata dalam input memiliki huruf vokal
         for word in user_input.split():
-            if not has_vowel(word):
-                words_without_vowels.append(word)
-                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks.")
+            # Inisialisasi variabel untuk melacak karakter dan jumlah kemunculannya dalam kata
+            char_count = {}
+            # Hitung kemunculan setiap karakter dalam kata
+            for char in word:
+                char_count[char] = char_count.get(char, 0) + 1
+            # Periksa apakah ada karakter dengan kemunculan lebih dari 2
+            if any(count > 2 for count in char_count.values()):
+                problematic_words.append(word)
+                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks.")
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
