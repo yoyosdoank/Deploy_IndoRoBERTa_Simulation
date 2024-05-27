@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
+from langdetect import detect
+from collections import Counter
 
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
@@ -50,21 +52,30 @@ if user_input and button:
     if len(user_input.split()) > 7:
         # Variabel untuk melacak kata-kata yang memenuhi kriteria
         problematic_words = []
-        # Cek apakah setiap kata dalam input memiliki huruf vokal
+        # Variabel untuk menghitung jumlah kata dalam bahasa Inggris dan Indonesia
+        english_word_count = 0
+        indonesian_word_count = 0
+        # Cek bahasa setiap kata dalam input
         for word in user_input.split():
+            # Cek bahasa dari kata menggunakan library langdetect
+            lang = detect(word)
+            if lang == 'en':
+                english_word_count += 1
+            elif lang == 'id':
+                indonesian_word_count += 1
             # Inisialisasi variabel untuk melacak karakter dan jumlah kemunculannya dalam kata
-            char_count = {}
-            # Hitung kemunculan setiap karakter dalam kata
-            for char in word:
-                char_count[char] = char_count.get(char, 0) + 1
+            char_count = Counter(word)
             # Periksa apakah ada karakter dengan kemunculan lebih dari 2
             if any(count > 2 for count in char_count.values()):
                 problematic_words.append(word)
-                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks dan prediksi.")
+                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks.")
             # Periksa apakah kata tidak memiliki huruf vokal
             if not has_vowel(word):
                 problematic_words.append(word)
-                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
+                st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks.")
+        # Cek apakah jumlah kata dalam bahasa Inggris lebih banyak daripada bahasa Indonesia
+        if english_word_count > indonesian_word_count:
+            st.warning("Kalimat ini memiliki lebih banyak kata dalam bahasa Inggris daripada bahasa Indonesia.")
                 
         inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
