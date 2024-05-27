@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from collections import Counter
 import os
-from langdetect import detect 
+from langdetect import detect, LangDetectException
 
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
