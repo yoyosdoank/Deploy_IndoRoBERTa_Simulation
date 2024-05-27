@@ -63,7 +63,7 @@ if user_input and button:
             char_count = Counter(word)
             # Periksa apakah ada karakter dengan kemunculan lebih dari 2
             if any(count > 2 for count in char_count.values()):
-                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama/dobel, dapat mempengaruhi konteks dan prediksi.")
+                st.warning(f"Kata '{word}' memiliki lebih dari 2 huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
             # Periksa apakah kata tidak memiliki huruf vokal
             if not has_vowel(word):
                 st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
