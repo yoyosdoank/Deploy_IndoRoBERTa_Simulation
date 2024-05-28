@@ -23,6 +23,10 @@ def has_consecutive_letters(word):
             count = 1
     return False
 
+# Fungsi untuk mengecek apakah suatu kata hanya terdiri dari angka atau tanda baca
+def is_number_or_punctuation(word):
+    return word.isdigit() or re.match(r'^[\W_]+$', word)
+
 # Definisi model deep learning
 @st.cache_resource()
 def get_model():
@@ -41,18 +45,18 @@ st.info("Masukkan kalimat Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai p
 
 # Klasifikasi sentimen
 sentimen = {
-  2: 'POSITIF',  
-  1: 'NETRAL',
-  0: 'NEGATIF'
+    2: 'POSITIF',  
+    1: 'NETRAL',
+    0: 'NEGATIF'
 }
 
 # Klasifikasi emosi
 emosi = {
-  4: 'SEDIH-KECEWA',
-  3: 'SAYANG',
-  2: 'SENANG-BAHAGIA',  
-  1: 'TAKUT-KHAWATIR',
-  0: 'MARAH-JIJIK'
+    4: 'SEDIH-KECEWA',
+    3: 'SAYANG',
+    2: 'SENANG-BAHAGIA',  
+    1: 'TAKUT-KHAWATIR',
+    0: 'MARAH-JIJIK'
 }
 
 # Definisi kategori prediksi
@@ -79,7 +83,7 @@ with st.form(key='my_form'):
             warning_count = 0
             for word in user_input.split():
                 # Mengabaikan angka dan tanda baca
-                if word.isdigit() or re.match(r'^[\W_]+$', word):
+                if is_number_or_punctuation(word):
                     continue
                 try:
                     lang = detect(word)
