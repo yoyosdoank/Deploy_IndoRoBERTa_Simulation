@@ -51,6 +51,16 @@ emosi = {
   0:'MARAH-JIJIK'
 }
 
+def get_confidence_level(prob):
+    if prob >= 0.95:
+        return "Sangat tinggi, sangat dapat diandalkan"
+    elif prob >= 0.85:
+        return "Tinggi, umumnya dapat diandalkan"
+    elif prob >= 0.70:
+        return "Moderat, cukup dapat diandalkan, tetapi mungkin perlu verifikasi tambahan"
+    else:
+        return "Rendah, perlu dipertimbangkan dengan hati-hati"
+
 # Membuat form
 user_input = st.text_area('**MASUKKAN KALIMAT:**')
 with st.form(key='my_form'):
@@ -99,8 +109,11 @@ with st.form(key='my_form'):
                 max_emotion_index = torch.argmax(logits2, dim=1).item()
                 max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
-                st.write("SENTIMEN:", f"**{sentimen[max_sentiment_index]}**", "; PREDIKSI:", f"**{max_sentiment_prob:.2%}**")
-                st.write("EMOSI:", f"**{emosi[max_emotion_index]}**", "; PREDIKSI:", f"**{max_emotion_prob:.2%}**")
+                sentiment_confidence = get_confidence_level(max_sentiment_prob)
+                emotion_confidence = get_confidence_level(max_emotion_prob)
+
+                st.write("SENTIMEN:", f"**{sentimen[max_sentiment_index]}**", "; PREDIKSI:", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence})")
+                st.write("EMOSI:", f"**{emosi[max_emotion_index]}**", "; PREDIKSI:", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
         else:
             st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
 
