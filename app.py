@@ -99,9 +99,7 @@ with st.form(key='my_form'):
                         warning_count += 1
                 except LangDetectException:
                     # Tidak menampilkan peringatan jika kata hanya angka atau tanda baca
-                    if not is_number_or_punctuation(word):
-                        st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
-                        warning_count += 1
+                    continue
 
             if warning_count > 7:
                 st.error("Warning lebih dari 7, analisis prediksi dihentikan, perbaiki kembali kalimat Anda.")
