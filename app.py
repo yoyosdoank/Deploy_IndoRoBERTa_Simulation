@@ -98,8 +98,10 @@ with st.form(key='my_form'):
                         st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
                         warning_count += 1
                 except LangDetectException:
-                    st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
-                    warning_count += 1
+                    # Tidak menampilkan peringatan jika kata hanya angka atau tanda baca
+                    if not is_number_or_punctuation(word):
+                        st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
+                        warning_count += 1
 
             if warning_count > 7:
                 st.error("Warning lebih dari 7, analisis prediksi dihentikan, perbaiki kembali kalimat Anda.")
