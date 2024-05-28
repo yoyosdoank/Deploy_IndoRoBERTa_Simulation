@@ -127,6 +127,7 @@ st.markdown("""
 # Menggabungkan beberapa catatan menjadi satu kotak informasi
 st.markdown("""
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
+<h3 style="color: white;">Catatan:</h3>
     <ol style="color: white;">
         <li><strong>Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.</strong></li>
         <li><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></li>
