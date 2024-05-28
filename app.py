@@ -56,13 +56,13 @@ emosi = {
 #Definisi kategori prediksi
 def get_confidence_level(prob):
     if prob >= 0.95:
-        return "**Kategori SANGAT TINGGI, sangat dapat diandalkan**"
+        return "Kategori **SANGAT TINGGI**, sangat dapat diandalkan"
     elif prob >= 0.85:
-        return "Kategori TINGGI, umumnya dapat diandalkan"
+        return "Kategori **TINGGI**, umumnya dapat diandalkan"
     elif prob >= 0.70:
-        return "**Kategori MODERAT, cukup dapat diandalkan, tetapi mungkin perlu verifikasi tambahan**"
+        return "Kategori **MODERAT**, cukup dapat diandalkan, tetapi mungkin perlu verifikasi tambahan"
     else:
-        return "**Kategori RENDAH, perlu dipertimbangkan dengan hati-hati**"
+        return "Kategori **RENDAH**, perlu dipertimbangkan dengan hati-hati"
 
 # Membuat form
 user_input = st.text_area('**MASUKKAN KALIMAT:**')
