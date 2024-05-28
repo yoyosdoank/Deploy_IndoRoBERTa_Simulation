@@ -1,17 +1,17 @@
 import streamlit as st
 import numpy as np
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, RobertaTokenizerFast
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from collections import Counter
-import os
 from langdetect import detect, LangDetectException
+import re
 
-#Definisi huruf vokal
+# Definisi huruf vokal
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
     return any(char in vowels for char in word)
-    
-#Definisi huruf sama berurutan
+
+# Definisi huruf sama berurutan
 def has_consecutive_letters(word):
     count = 1
     for i in range(1, len(word)):
@@ -23,39 +23,39 @@ def has_consecutive_letters(word):
             count = 1
     return False
 
-#definisi model deep learning
+# Definisi model deep learning
 @st.cache_resource()
 def get_model():
     tokenizer = AutoTokenizer.from_pretrained("w11wo/indonesian-roberta-base-sentiment-classifier")
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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")
-    return tokenizer,model1,model2
+    return tokenizer, model1, model2
 
-tokenizer,model1,model2 = get_model()
+tokenizer, model1, model2 = get_model()
 
 st.image("banner_edit.png", use_column_width=True)
 header = st.title("Prediksi Sentimen & Emosi Untuk Media Sosial Berbasis Teks Bahasa Indonesia Dengan Model IndoRoBERTa.")
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
-note2 = st.write("SENTIMEN adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. EMOSI adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat. ***- Ivanov, D. (2023) -***")
+note2 = st.write("SENTIMEN adalah sikap, perasaan, atau pandangan ...")
 st.info("Masukkan kalimat Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediksi. Tekan 'RESET' untuk atur ulang halaman.")
 
-#klasifikasi sentimen
+# Klasifikasi sentimen
 sentimen = {
-  2:'POSITIF',  
-  1:'NETRAL',
-  0:'NEGATIF'
+  2: 'POSITIF',  
+  1: 'NETRAL',
+  0: 'NEGATIF'
 }
 
-#klasifikasi emosi
+# Klasifikasi emosi
 emosi = {
-  4:'SEDIH-KECEWA',
-  3:'SAYANG',
-  2:'SENANG-BAHAGIA',  
-  1:'TAKUT-KHAWATIR',
-  0:'MARAH-JIJIK'
+  4: 'SEDIH-KECEWA',
+  3: 'SAYANG',
+  2: 'SENANG-BAHAGIA',  
+  1: 'TAKUT-KHAWATIR',
+  0: 'MARAH-JIJIK'
 }
 
-#Definisi kategori prediksi
+# Definisi kategori prediksi
 def get_confidence_level(prob):
     if prob >= 0.95:
         return "Kategori **SANGAT TINGGI**, sangat dapat diandalkan"
@@ -72,7 +72,7 @@ with st.form(key='my_form'):
     button = st.form_submit_button("ANALISIS")
     reset_button = st.form_submit_button("RESET")
 
-   if button and user_input:
+    if button and user_input:
         if len(user_input.split()) > 7:
             english_word_count = 0
             indonesian_word_count = 0
