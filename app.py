@@ -23,6 +23,7 @@ def has_consecutive_letters(word):
             count = 1
     return False
 
+#definisi model deep learning
 @st.cache_resource()
 def get_model():
     tokenizer = AutoTokenizer.from_pretrained("w11wo/indonesian-roberta-base-sentiment-classifier")
@@ -38,13 +39,14 @@ note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
 note2 = st.write("SENTIMEN adalah sikap, perasaan, atau pandangan yang lebih stabil dan cenderung bertahan lebih lama terhadap seseorang, situasi, atau fenomena tertentu. Sentimen merupakan cerminan dari emosi yang lebih menetap dan terinternalisasi. EMOSI adalah respons psikologis yang intens, sering kali singkat, terhadap suatu peristiwa atau situasi. Emosi biasanya bersifat sementara dan bisa berubah dengan cepat. ***- Ivanov, D. (2023) -***")
 st.info("Masukkan kalimat Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediksi. Tekan 'RESET' untuk atur ulang halaman.")
 
-
+#klasifikasi sentimen
 sentimen = {
   2:'POSITIF',  
   1:'NETRAL',
   0:'NEGATIF'
 }
 
+#klasifikasi emosi
 emosi = {
   4:'SEDIH-KECEWA',
   3:'SAYANG',
@@ -70,12 +72,15 @@ with st.form(key='my_form'):
     button = st.form_submit_button("ANALISIS")
     reset_button = st.form_submit_button("RESET")
 
-    if button and user_input:
+   if button and user_input:
         if len(user_input.split()) > 7:
             english_word_count = 0
             indonesian_word_count = 0
             warning_count = 0
             for word in user_input.split():
+                # Mengabaikan angka dan tanda baca
+                if word.isdigit() or re.match(r'^\W+$', word):
+                    continue
                 try:
                     lang = detect(word)
                     if lang == 'en':
@@ -140,7 +145,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Menggabungkan beberapa catatan menjadi satu kotak informasi
+# Menggabungkan beberapa catatan info
 st.markdown("""
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
 <h3 style="color: white;">Catatan:</h3>
