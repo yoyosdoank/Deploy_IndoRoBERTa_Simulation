@@ -79,7 +79,7 @@ with st.form(key='my_form'):
             warning_count = 0
             for word in user_input.split():
                 # Mengabaikan angka dan tanda baca
-                if word.isdigit() or re.match(r'^\W+$', word):
+                if word.isdigit() or re.match(r'^[\W_]+$', word):
                     continue
                 try:
                     lang = detect(word)
