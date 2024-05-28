@@ -129,10 +129,12 @@ st.markdown("""
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
 <h3 style="color: white;">Catatan:</h3>
     <ol style="color: white;">
-        <li><strong>Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.</strong></li>
+        <li><strong>Kalimat diharapkan mempunyai konteks, minimal 7 kata dalam 1 kalimat.</strong></li>
         <li><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></li>
         <li><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></li>
-        <li><strong>Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.</strong></li>
+        <li><strong>Analisis selain menggunakan bahasa Indonesia tidak disarankan.</strong></li>
+        <li><strong>Warning yang muncul saat analisis, hanya sebagai reminder.</strong></li>
+        <li><strong>Jika muncul 5 atau lebih Warning, prediksi tidak akan dijalankan, harap kalimat diperbaiki.</strong></li>
     </ol>
 </div>
 """, unsafe_allow_html=True)
