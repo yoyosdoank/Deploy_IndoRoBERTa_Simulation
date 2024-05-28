@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, RobertaTokenizerFast
 import torch
 from collections import Counter
 import os
@@ -23,7 +23,7 @@ def has_consecutive_letters(word):
 
 @st.cache_resource()
 def get_model():
-    tokenizer = AutoTokenizer.from_pretrained("w11wo/indonesian-roberta-base-sentiment-classifier")
+    tokenizer = RobertaTokenizerFast.from_pretrained("w11wo/indonesian-roberta-base-sentiment-classifier")
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-for-Twitter", token="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")
     return tokenizer,model1,model2
