@@ -115,8 +115,8 @@ with st.form(key='my_form'):
                 sentiment_confidence = get_confidence_level(max_sentiment_prob)
                 emotion_confidence = get_confidence_level(max_emotion_prob)
 
-                st.write("SENTIMEN:", f"**{sentimen[max_sentiment_index]}**", "; PREDIKSI:", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence})")
-                st.write("EMOSI:", f"**{emosi[max_emotion_index]}**", "; PREDIKSI:", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
+                st.write("SENTIMEN:", f"**{sentimen[max_sentiment_index]}**", "--> PREDIKSI:", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence})")
+                st.write("EMOSI:", f"**{emosi[max_emotion_index]}**", "--> PREDIKSI:", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
         else:
             st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
 
