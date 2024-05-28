@@ -38,17 +38,17 @@ st.info("Masukkan kalimat Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai p
 
 
 sentimen = {
-  2:'Positif',  
-  1:'Netral',
-  0:'Negatif'
+  2:'POSITIF',  
+  1:'NETRAL',
+  0:'NEGATIF'
 }
 
 emosi = {
-  4:'Sedih - Kecewa',
-  3:'Sayang',
-  2:'Senang - Bahagia',  
-  1:'Takut - Khawatir',
-  0:'Marah - Jijik'
+  4:'SEDIH-KECEWA',
+  3:'SAYANG',
+  2:'SENANG-BAHAGIA',  
+  1:'TAKUT-KHAWATIR',
+  0:'MARAH-JIJIK'
 }
 
 # Membuat form
