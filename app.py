@@ -6,10 +6,12 @@ from collections import Counter
 import os
 from langdetect import detect, LangDetectException
 
+#Definisi huruf vokal
 def has_vowel(word):
     vowels = 'aeiouAEIOU'
     return any(char in vowels for char in word)
-
+    
+#Definisi huruf sama berurutan
 def has_consecutive_letters(word):
     count = 1
     for i in range(1, len(word)):
@@ -54,13 +56,13 @@ emosi = {
 #Definisi kategori prediksi
 def get_confidence_level(prob):
     if prob >= 0.95:
-        return "**Tingkat Prediksi SANGAT TINGGI, sangat dapat diandalkan**"
+        return "**Kategori SANGAT TINGGI, sangat dapat diandalkan**"
     elif prob >= 0.85:
-        return "Tingkat Prediksi TINGGI, umumnya dapat diandalkan"
+        return "Kategori TINGGI, umumnya dapat diandalkan"
     elif prob >= 0.70:
-        return "**Tingkat Prediksi MODERAT, cukup dapat diandalkan, tetapi mungkin perlu verifikasi tambahan**"
+        return "**Kategori MODERAT, cukup dapat diandalkan, tetapi mungkin perlu verifikasi tambahan**"
     else:
-        return "**Tingkat Prediksi RENDAH, perlu dipertimbangkan dengan hati-hati**"
+        return "**Kategori RENDAH, perlu dipertimbangkan dengan hati-hati**"
 
 # Membuat form
 user_input = st.text_area('**MASUKKAN KALIMAT:**')
