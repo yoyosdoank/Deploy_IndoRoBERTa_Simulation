@@ -99,8 +99,8 @@ with st.form(key='my_form'):
                 max_emotion_index = torch.argmax(logits2, dim=1).item()
                 max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
-                st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
-                st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
+                st.write("SENTIMEN:", f"**{sentimen[max_sentiment_index]}**", "; PREDIKSI:", f"**{max_sentiment_prob:.2%}**")
+                st.write("EMOSI:", f"**{emosi[max_emotion_index]}**", "; PREDIKSI:", f"**{max_emotion_prob:.2%}**")
         else:
             st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
 
