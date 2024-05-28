@@ -124,7 +124,10 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-note3 = st.caption("****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***")
-note4 = st.caption("****Rekomendasi media sosial berbasis teks: Twitter.***")
-note5 = st.caption("****Dimungkinkan analisis dari media sosial lainnya.***")
-note6 = st.caption("****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***")
+# Menggabungkan beberapa catatan menjadi satu kotak informasi
+st.info("""
+****Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.***
+****Rekomendasi media sosial berbasis teks: Twitter.***
+****Dimungkinkan analisis dari media sosial lainnya.***
+****Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.***
+""")
