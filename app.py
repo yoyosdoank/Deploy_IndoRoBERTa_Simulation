@@ -11,9 +11,14 @@ def has_vowel(word):
     return any(char in vowels for char in word)
 
 def has_consecutive_letters(word):
-    for i in range(len(word) - 1):
-        if word[i] == word[i+1]:
-            return True
+    count = 1
+    for i in range(1, len(word)):
+        if word[i] == word[i - 1]:
+            count += 1
+            if count >= 3:
+                return True
+        else:
+            count = 1
     return False
 
 @st.cache_resource()
@@ -65,7 +70,7 @@ with st.form(key='my_form'):
                     elif lang == 'id':
                         indonesian_word_count += 1
                     if has_consecutive_letters(word):
-                        st.warning(f"Kata '{word}' memiliki dua atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
+                        st.warning(f"Kata '{word}' memiliki tiga atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
                         warning_count += 1
                     if not has_vowel(word):
                         st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
