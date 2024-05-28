@@ -79,8 +79,8 @@ with st.form(key='my_form'):
                     st.warning(f"Tidak dapat mendeteksi bahasa untuk kata '{word}'.")
                     warning_count += 1
 
-            if warning_count > 5:
-                st.error("Warning lebih dari 5, analisis prediksi dihentikan, perbaiki kembali kalimat Anda.")
+            if warning_count > 7:
+                st.error("Warning lebih dari 7, analisis prediksi dihentikan, perbaiki kembali kalimat Anda.")
             else:
                 if english_word_count > indonesian_word_count:
                     st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
@@ -134,7 +134,7 @@ st.markdown("""
         <li><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></li>
         <li><strong>Analisis selain menggunakan bahasa Indonesia tidak disarankan.</strong></li>
         <li><strong>Peringatan yang muncul saat analisis, hanya sebagai reminder.</strong></li>
-        <li><strong>Jika muncul 5 atau lebih peringatan, prediksi tidak dijalankan, harap kalimat diperbaiki.</strong></li>
+        <li><strong>Jika muncul lebih dari 7 peringatan, prediksi tidak dijalankan.</strong></li>
     </ol>
 </div>
 """, unsafe_allow_html=True)
