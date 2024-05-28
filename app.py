@@ -127,9 +127,11 @@ st.markdown("""
 # Menggabungkan beberapa catatan menjadi satu kotak informasi
 st.markdown("""
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
-    <p><strong>Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.</strong></p>
-    <p><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></p>
-    <p><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></p>
-    <p><strong>Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.</strong></p>
+    <ol style="color: white;">
+        <li><strong>Harap memasukkan kalimat yang mempunyai konteks, minimal 7 kata dalam 1 kalimat.</strong></li>
+        <li><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></li>
+        <li><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></li>
+        <li><strong>Analisis selain menggunakan bahasa Indonesia tidak dibenarkan.</strong></li>
+    </ol>
 </div>
 """, unsafe_allow_html=True)
