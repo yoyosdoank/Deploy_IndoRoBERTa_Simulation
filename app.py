@@ -102,7 +102,7 @@ with st.form(key='my_form'):
                 st.write("Sentimen:", f"**{sentimen[max_sentiment_index]}**", "; Persentase Prediksi:", f"**{max_sentiment_prob:.2%}**")
                 st.write("Emosi:", f"**{emosi[max_emotion_index]}**", "; Persentase Prediksi:", f"**{max_emotion_prob:.2%}**")
         else:
-            st.error("Panjang 1 kalimat disarankan lebih dari 7 kata untuk memahami konteks dalam kalimat, input kembali pada kolom teks.")
+            st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
 
     if reset_button:
         st.experimental_rerun()
@@ -129,7 +129,7 @@ st.markdown("""
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
 <h3 style="color: white;">Catatan:</h3>
     <ol style="color: white;">
-        <li><strong>Kalimat diharapkan mempunyai konteks, minimal 7 kata dalam 1 kalimat.</strong></li>
+        <li><strong>Kalimat diharapkan mempunyai konteks, minimal 7 kata.</strong></li>
         <li><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></li>
         <li><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></li>
         <li><strong>Analisis selain menggunakan bahasa Indonesia tidak disarankan.</strong></li>
