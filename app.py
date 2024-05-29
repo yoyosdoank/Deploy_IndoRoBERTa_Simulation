@@ -34,7 +34,7 @@ def get_model():
     #model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     #model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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")
     model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
-    return tokenizer, model1, model2, model3
+    return tokenizer, model3 # model1, model2,
 
 tokenizer,  model3 = get_model() #model1, model2,
 
@@ -125,11 +125,11 @@ with st.form(key='my_form'):
                 #logits2 = output2.logits
                 logits3 = output3.logits
 
-                max_sentiment_index = torch.argmax(logits1, dim=1).item()
-                max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
+               # max_sentiment_index = torch.argmax(logits1, dim=1).item()
+               # max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
 
-                max_emotion_index = torch.argmax(logits2, dim=1).item()
-                max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+               # max_emotion_index = torch.argmax(logits2, dim=1).item()
+               # max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
                 max_hatespeech_index = torch.argmax(logits3, dim=1).item()
                 max_hatespeech_prob = torch.softmax(logits3, dim=1).squeeze()[max_hatespeech_index].item()
