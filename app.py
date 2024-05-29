@@ -169,7 +169,6 @@ st.markdown("""
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
 <h3 style="color: white;">Catatan:</h3>
     <ol style="color: white;">
-        
         <li><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></li>
         <li><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></li>
         <li><strong>Analisis selain menggunakan bahasa Indonesia tidak disarankan.</strong></li>
@@ -178,7 +177,7 @@ st.markdown("""
             <li><strong>Jika <span style="color: yellow;">peringatan</span> muncul < 7, kalimat tetap dapat diprediksi. </strong></li>
             <li><strong>Jika <span style="color: yellow;">peringatan</span> muncul > 7, prediksi tidak berjalan, sesuaikan kembali input teks.</strong></li>
             </ul> 
-         <li><strong>Input teks minimal 7 kata.</strong></li>
+        <li><strong>Input teks minimal 7 kata.</strong></li>
     </ol>
     
 """, unsafe_allow_html=True) 
