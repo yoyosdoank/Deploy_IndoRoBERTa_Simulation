@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, RobertaForSequenceClassification
+from transformers import AutoTokenizer, RobertaTokenizerFast, AutoModelForSequenceClassification, RobertaForSequenceClassification
 import torch
 from collections import Counter
 from langdetect import detect, LangDetectException
@@ -30,7 +30,7 @@ def is_number_or_punctuation(word):
 # Definisi model deep learning
 @st.cache_resource()
 def get_model():
-    tokenizer = AutoTokenizer.from_pretrained("flax-community/indonesian-roberta-base")
+    tokenizer = RobertaTokenizerFast.from_pretrained("flax-community/indonesian-roberta-base")
     model1 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     model2 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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")
     model3 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
