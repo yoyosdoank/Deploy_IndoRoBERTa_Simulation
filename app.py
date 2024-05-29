@@ -177,7 +177,10 @@ st.markdown("""
         <li><strong>jika <span style="color: yellow;">peringatan</span> muncul < 7, kalimat tetap dapat diprediksi. Jika <span style="color: yellow;">peringatan</span> muncul > 7, prediksi tidak berjalan.</strong></li>
         <li><strong>Untuk diketahui, hasil prediksi perlu dipertimbangkan kembali dari ahlinya, khususnya kategori 'MODERAT' dan 'KURANG'. </strong></li>
     </ol>
-    <br>
-""", unsafe_allow_html=True)
+    
+""", unsafe_allow_html=True) 
+
+# margin HTML
+st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
 
 st.info("DISCLAIMER: Seluruh hasil prediksi perlu dipertimbangkan kembali dari ahlinya, khususnya kategori 'MODERAT' dan 'KURANG'")
