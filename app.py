@@ -31,9 +31,9 @@ def is_number_or_punctuation(word):
 @st.cache_resource()
 def get_model():
     tokenizer = RobertaTokenizerFast.from_pretrained("flax-community/indonesian-roberta-base")
-    model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
-    model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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")
-    model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
+    model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
+    model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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")
+    model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
     return tokenizer, model1, model2, model3
 
 tokenizer, model1, model2, model3 = get_model()
