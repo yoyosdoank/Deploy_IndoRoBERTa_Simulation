@@ -166,9 +166,10 @@ st.markdown("""
 
 # Menggabungkan beberapa catatan info
 st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    .sans-serif {
-        font-family: Arial, Helvetica, sans-serif;
+    .poppins {
+        font-family: 'Poppins', sans-serif;
     }
 </style>
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
