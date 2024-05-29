@@ -166,6 +166,11 @@ st.markdown("""
 
 # Menggabungkan beberapa catatan info
 st.markdown("""
+<style>
+    .sans-serif {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
 <h3 style="color: white;">Catatan:</h3>
     <ol style="color: white;">
