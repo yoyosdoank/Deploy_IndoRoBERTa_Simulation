@@ -175,7 +175,6 @@ st.markdown("""
         <li><strong>Analisis selain menggunakan bahasa Indonesia tidak disarankan.</strong></li>
         <li><strong>Peringatan berwarna <span style="color: yellow;">KUNING</span> muncul saat analisis sebagai reminder.</strong></li>
         <li><strong>jika <span style="color: yellow;">peringatan</span> muncul < 7, kalimat tetap dapat diprediksi. Jika <span style="color: yellow;">peringatan</span> muncul > 7, prediksi tidak berjalan.</strong></li>
-        <li><strong>Untuk diketahui, hasil prediksi perlu dipertimbangkan kembali dari ahlinya, khususnya kategori 'MODERAT' dan 'KURANG'. </strong></li>
     </ol>
     
 """, unsafe_allow_html=True) 
