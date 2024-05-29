@@ -173,8 +173,9 @@ st.markdown("""
         <li><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></li>
         <li><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></li>
         <li><strong>Analisis selain menggunakan bahasa Indonesia tidak disarankan.</strong></li>
-        <li><strong>Peringatan yang muncul saat analisis, hanya sebagai reminder.</strong></li>
-        <li><strong>Jika muncul lebih dari 7 peringatan, prediksi tidak dijalankan.</strong></li>
+        <li><strong>Peringatan berwarna KUNING muncul saat analisis sebagai reminder.</strong></li>
+        <li><strong>jika peringatan muncul < 7, kalimat tetap dapat diprediksi. Jika peringatan muncul > 7, prediksi tidak berjalan.</strong></li>
+        <li><strong>Untuk diketahui, hasil prediksi perlu dipertimbangkan kembali dari ahlinya, khususnya kategori 'MODERAT' dan 'KURANG'. </strong></li>
     </ol>
 </div>
 """, unsafe_allow_html=True)
