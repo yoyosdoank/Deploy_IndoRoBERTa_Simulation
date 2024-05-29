@@ -31,9 +31,9 @@ def is_number_or_punctuation(word):
 @st.cache_resource()
 def get_model():
     tokenizer = RobertaTokenizerFast.from_pretrained("flax-community/indonesian-roberta-base")
-    model1 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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", ignore_mismatched_sizes=True)
-    model2 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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", ignore_mismatched_sizes=True)
-    model3 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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", ignore_mismatched_sizes=True)
+    model1 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
+    model2 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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")
+    model3 = RobertaForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
     return tokenizer, model1, model2, model3
 
 tokenizer, model1, model2, model3 = get_model()
