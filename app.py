@@ -43,7 +43,7 @@ header = st.title("RoBERTa: Prediksi Sentimen, Emosi dan Hate Speech Untuk Media
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
 note2 = st.write("EMOSI dan SENTIMEN adalah dua konsep yang berbeda meskipun saling terkait. EMOSI adalah keadaan psikologis yang kompleks dan alami, seperti kebahagiaan atau kemarahan, yang terdiri dari pengalaman subjektif, respons fisiologis, dan respons perilaku. Emosi bersifat mentah dan dapat dipicu oleh berbagai situasi atau kondisi individu. Sebaliknya, SENTIMEN adalah sikap mental atau pemikiran yang dipengaruhi oleh emosi, dan lebih terorganisir serta sering kali mencerminkan hubungan dengan objek sosial tertentu, seperti cinta atau kebencian. Sentimen menggabungkan aspek kognitif, fisiologis, dan sosial budaya, menjadikannya lebih dari sekadar respons emosional. (Ivanov, 2023)​")
 note3 = st.write("Ujaran kebencian (HATE SPEECH) adalah tindakan komunikasi dalam bentuk provokasi, hasutan, atau penghinaan terhadap individu atau kelompok berdasarkan aspek seperti ras, warna kulit, etnis, gender, cacat, orientasi seksual, kewarganegaraan, agama, dan lain-lain. Hal ini dapat berupa perkataan, tulisan, atau tindakan yang dilarang karena berpotensi memicu tindakan kekerasan atau prasangka​.(Dictionary.com).")
-st.info("Masukkan kalimat Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediksi. Tekan 'RESET' untuk atur ulang halaman.")
+st.info("Input teks Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediksi. Tekan 'RESET' untuk atur ulang halaman.")
 
 # Klasifikasi sentimen
 sentimen = {
@@ -79,7 +79,7 @@ def get_confidence_level(prob):
         return "Kategori **RENDAH**, perlu dipertimbangkan dengan hati-hati"
 
 # Membuat form
-user_input = st.text_area('**MASUKKAN / SALIN KALIMAT DARI MEDIA SOSIAL:**')
+user_input = st.text_area('**MASUKKAN / SALIN TEKS DARI MEDIA SOSIAL:**')
 with st.form(key='my_form'):
     button = st.form_submit_button("ANALISIS")
     reset_button = st.form_submit_button("RESET")
@@ -100,10 +100,10 @@ with st.form(key='my_form'):
                     elif lang == 'id':
                         indonesian_word_count += 1
                     if has_consecutive_letters(word):
-                        st.warning(f"Kata '{word}' memiliki tiga atau lebih huruf yang sama berurutan, dapat mempengaruhi konteks dan prediksi.")
+                        st.warning(f"Kata '{word}' memiliki tiga atau lebih huruf yang sama berurutan, mungkin mempengaruhi konteks dan prediksi.")
                         warning_count += 1
                     if not has_vowel(word):
-                        st.warning(f"Kata '{word}' tidak memiliki huruf vokal, dapat mempengaruhi konteks dan prediksi.")
+                        st.warning(f"Kata '{word}' tidak memiliki huruf vokal, mungkin mempengaruhi konteks dan prediksi.")
                         warning_count += 1
                 except LangDetectException:
                     # Tidak menampilkan peringatan jika kata hanya angka atau tanda baca
@@ -113,7 +113,7 @@ with st.form(key='my_form'):
                 st.error("Warning lebih dari 7, analisis prediksi dihentikan, perbaiki kembali kalimat Anda.")
             else:
                 if english_word_count > indonesian_word_count:
-                    st.warning("Kalimat ini dominan dalam bahasa Inggris, dapat mempengaruhi konteks dan prediksi.")
+                    st.warning("Kalimat ini dominan dalam bahasa Inggris, mungkin mempengaruhi konteks dan prediksi.")
 
                 inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
@@ -169,7 +169,7 @@ st.markdown("""
 <div style="background-color: #002060; padding: 10px; border-radius: 5px; border: 1px solid #003399;">
 <h3 style="color: white;">Catatan:</h3>
     <ol style="color: white;">
-        <li><strong>Kalimat diharapkan mempunyai konteks, minimal 7 kata.</strong></li>
+        
         <li><strong>Rekomendasi media sosial berbasis teks: Twitter.</strong></li>
         <li><strong>Dimungkinkan analisis dari media sosial lainnya.</strong></li>
         <li><strong>Analisis selain menggunakan bahasa Indonesia tidak disarankan.</strong></li>
@@ -178,11 +178,12 @@ st.markdown("""
             <li><strong>Jika <span style="color: yellow;">peringatan</span> muncul < 7, kalimat tetap dapat diprediksi. </strong></li>
             <li><strong>Jika <span style="color: yellow;">peringatan</span> muncul > 7, prediksi tidak berjalan, sesuaikan kembali input teks.</strong></li>
             </ul> 
+         <li><strong>Input teks minimal 7 kata.</strong></li>
     </ol>
     
 """, unsafe_allow_html=True) 
 
 # margin HTML
-st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
 
 st.info("**DISCLAIMER** : Seluruh hasil prediksi perlu dipertimbangkan kembali dari ahlinya, khususnya kategori 'MODERAT' dan 'KURANG'")
