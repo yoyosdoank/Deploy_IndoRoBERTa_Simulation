@@ -33,9 +33,10 @@ def get_model():
     tokenizer = AutoTokenizer.from_pretrained("w11wo/indonesian-roberta-base-sentiment-classifier")
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Classifier-for-Twitter", token="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")
     model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Classifier-Base", token="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")
+    model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
     return tokenizer, model1, model2
 
-tokenizer, model1, model2 = get_model()
+tokenizer, model1, model2, model3 = get_model()
 
 st.image("banner_edit.png", use_column_width=True)
 header = st.title("Prediksi Sentimen & Emosi Untuk Media Sosial Berbasis Teks Bahasa Indonesia Dengan Model IndoRoBERTa.")
@@ -52,6 +53,15 @@ sentimen = {
 
 # Klasifikasi emosi
 emosi = {
+    4: 'SEDIH-KECEWA',
+    3: 'SAYANG',
+    2: 'SENANG-BAHAGIA',  
+    1: 'TAKUT-KHAWATIR',
+    0: 'MARAH-JIJIK'
+}
+
+# Klasifikasi hatespeech
+hate = {
     4: 'SEDIH-KECEWA',
     3: 'SAYANG',
     2: 'SENANG-BAHAGIA',  
@@ -111,9 +121,11 @@ with st.form(key='my_form'):
 
                 output1 = model1(**inputs)
                 output2 = model2(**inputs)
+                output3 = model3(**inputs)
 
                 logits1 = output1.logits
                 logits2 = output2.logits
+                logits3 = output3.logits
 
                 max_sentiment_index = torch.argmax(logits1, dim=1).item()
                 max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
@@ -121,11 +133,16 @@ with st.form(key='my_form'):
                 max_emotion_index = torch.argmax(logits2, dim=1).item()
                 max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
+                max_hatespeech_index = torch.argmax(logits3, dim=1).item()
+                max_hatespeech_prob = torch.softmax(logits3, dim=1).squeeze()[max_hatespeech_index].item()
+
                 sentiment_confidence = get_confidence_level(max_sentiment_prob)
                 emotion_confidence = get_confidence_level(max_emotion_prob)
+                hatespeech_confidence = get_confidence_level(max_hatespeech_prob)
 
                 st.write("SENTIMEN:", f"**{sentimen[max_sentiment_index]}**", "--- PREDIKSI:", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence}) ---")
                 st.write("EMOSI:", f"**{emosi[max_emotion_index]}**", "--- PREDIKSI:", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence}) ---")
+                st.write("HATE SPEECH:", f"**{hate[max_hatespeech_index]}**", "--- PREDIKSI:", f"**{max_hatespeech_prob:.2%}**", f"({hatespeech_confidence}) ---")
         else:
             st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
 
