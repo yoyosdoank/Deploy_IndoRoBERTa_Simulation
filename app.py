@@ -61,12 +61,9 @@ emosi = {
 }
 
 # Klasifikasi hatespeech
-hate = {
-    4: 'SEDIH-KECEWA',
-    3: 'SAYANG',
-    2: 'SENANG-BAHAGIA',  
-    1: 'TAKUT-KHAWATIR',
-    0: 'MARAH-JIJIK'
+hate = {  
+    1: 'BUKAN HATE SPEECH',
+    0: 'HATE SPEECH'
 }
 
 # Definisi kategori prediksi
