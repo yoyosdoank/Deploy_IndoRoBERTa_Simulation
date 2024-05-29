@@ -79,7 +79,7 @@ def get_confidence_level(prob):
         return "Kategori **RENDAH**, perlu dipertimbangkan dengan hati-hati"
 
 # Membuat form
-user_input = st.text_area('**MASUKKAN KALIMAT:**')
+user_input = st.text_area('**MASUKKAN / SALIN KALIMAT DARI MEDIA SOSIAL:**')
 with st.form(key='my_form'):
     button = st.form_submit_button("ANALISIS")
     reset_button = st.form_submit_button("RESET")
