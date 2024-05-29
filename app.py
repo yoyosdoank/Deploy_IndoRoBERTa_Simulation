@@ -39,7 +39,7 @@ def get_model():
 tokenizer, model1, model2, model3 = get_model()
 
 st.image("banner_edit.png", use_column_width=True)
-header = st.title("Prediksi Sentimen & Emosi Untuk Media Sosial Berbasis Teks Bahasa Indonesia Dengan Model IndoRoBERTa.")
+header = st.title("Prediksi Sentimen, Emosi dan Hate Speech Untuk Media Sosial Berbasis Teks Bahasa Indonesia Dengan Model IndoRoBERTa.")
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
 note2 = st.write("SENTIMEN adalah sikap, perasaan, atau pandangan ...")
 st.info("Masukkan kalimat Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediksi. Tekan 'RESET' untuk atur ulang halaman.")
