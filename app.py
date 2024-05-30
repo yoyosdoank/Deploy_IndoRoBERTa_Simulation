@@ -185,4 +185,4 @@ st.markdown("""
 # margin HTML
 st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
 
-st.info("**DISCLAIMER** : Seluruh hasil prediksi perlu dipertimbangkan kembali dari ahlinya, khususnya kategori 'MODERAT' dan 'KURANG'")
+st.info("**DISCLAIMER** : website ini masih dalam tahap uji coba.")
