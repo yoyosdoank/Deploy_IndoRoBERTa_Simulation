@@ -39,7 +39,7 @@ def get_model():
 tokenizer, model1, model2, model3 = get_model() 
 
 st.image("banner_edit.png", use_column_width=True)
-header = st.title("RoBERTa: Prediksi Sentimen, Emosi dan Hate Speech Untuk Media Sosial Bahasa Indonesia.")
+header = st.title("IndoRoBERTa: Prediksi Sentimen, Emosi dan Hate Speech Untuk Media Sosial Bahasa Indonesia.")
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
 note2 = st.write("EMOSI dan SENTIMEN adalah dua konsep yang berbeda meskipun saling terkait. EMOSI adalah keadaan psikologis yang kompleks dan alami, seperti kebahagiaan atau kemarahan, yang terdiri dari pengalaman subjektif, respons fisiologis, dan respons perilaku. Emosi bersifat mentah dan dapat dipicu oleh berbagai situasi atau kondisi individu. Sebaliknya, SENTIMEN adalah sikap mental atau pemikiran yang dipengaruhi oleh emosi, dan lebih terorganisir serta sering kali mencerminkan hubungan dengan objek sosial tertentu, seperti cinta atau kebencian. Sentimen menggabungkan aspek kognitif, fisiologis, dan sosial budaya, menjadikannya lebih dari sekadar respons emosional. (Ivanov, 2023)​")
 note3 = st.write("Ujaran kebencian (HATE SPEECH) adalah tindakan komunikasi dalam bentuk provokasi, hasutan, atau penghinaan terhadap individu atau kelompok berdasarkan aspek seperti ras, warna kulit, etnis, gender, cacat, orientasi seksual, kewarganegaraan, agama, dan lain-lain. Hal ini dapat berupa perkataan, tulisan, atau tindakan yang dilarang karena berpotensi memicu tindakan kekerasan atau prasangka​.(Dictionary.com).")
