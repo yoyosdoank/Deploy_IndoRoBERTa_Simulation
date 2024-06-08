@@ -185,4 +185,4 @@ st.markdown("""
 # margin HTML
 st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
 
-st.info("**DISCLAIMER** : website ini masih dalam tahap uji coba.")
+st.info("**Disclaimer** : Program ini masih dalam tahap uji coba.")
