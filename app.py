@@ -32,17 +32,20 @@ def is_number_or_punctuation(word):
 def get_model():
     tokenizer = AutoTokenizer.from_pretrained("flax-community/indonesian-roberta-base")
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Base-Twitter-Classifier", token="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")
-    model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Base-Twitter-Classifier", token="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")
-    model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
-    return tokenizer, model1, model2, model3
+    #model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Base-Twitter-Classifier", token="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")
+    #model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
+    return tokenizer, model1
+    #model2, model3
 
 tokenizer, model1, model2, model3 = get_model() 
 
 st.image("banner_edit.png", use_column_width=True)
-header = st.title("IndoRoBERTa: Prediksi Sentimen, Emosi dan Hate Speech Untuk Media Sosial Bahasa Indonesia.")
+header = st.title("IndoRoBERTa: Prediksi Sentimen Untuk Media Sosial Bahasa Indonesia Berbasis Teks.")
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
-note2 = st.write("EMOSI dan SENTIMEN adalah dua konsep yang berbeda meskipun saling terkait. EMOSI adalah keadaan psikologis yang kompleks dan alami, seperti kebahagiaan atau kemarahan, yang terdiri dari pengalaman subjektif, respons fisiologis, dan respons perilaku. Emosi bersifat mentah dan dapat dipicu oleh berbagai situasi atau kondisi individu. Sebaliknya, SENTIMEN adalah sikap mental atau pemikiran yang dipengaruhi oleh emosi, dan lebih terorganisir serta sering kali mencerminkan hubungan dengan objek sosial tertentu, seperti cinta atau kebencian. Sentimen menggabungkan aspek kognitif, fisiologis, dan sosial budaya, menjadikannya lebih dari sekadar respons emosional. (Ivanov, 2023)​")
-note3 = st.write("Ujaran kebencian (HATE SPEECH) adalah tindakan komunikasi dalam bentuk provokasi, hasutan, atau penghinaan terhadap individu atau kelompok berdasarkan aspek seperti ras, warna kulit, etnis, gender, cacat, orientasi seksual, kewarganegaraan, agama, dan lain-lain. Hal ini dapat berupa perkataan, tulisan, atau tindakan yang dilarang karena berpotensi memicu tindakan kekerasan atau prasangka​.(Dictionary.com).")
+note2 = st.write(
+    #"EMOSI dan SENTIMEN adalah dua konsep yang berbeda meskipun saling terkait. EMOSI adalah keadaan psikologis yang kompleks dan alami, seperti kebahagiaan atau kemarahan, yang terdiri dari pengalaman subjektif, respons fisiologis, dan respons perilaku. Emosi bersifat mentah dan dapat dipicu oleh berbagai situasi atau kondisi individu. 
+    "SENTIMEN adalah sikap mental atau pemikiran yang dipengaruhi oleh emosi, dan lebih terorganisir serta sering kali mencerminkan hubungan dengan objek sosial tertentu, seperti cinta atau kebencian. Sentimen menggabungkan aspek kognitif, fisiologis, dan sosial budaya, menjadikannya lebih dari sekadar respons emosional. (Ivanov, 2023)​")
+#note3 = st.write("Ujaran kebencian (HATE SPEECH) adalah tindakan komunikasi dalam bentuk provokasi, hasutan, atau penghinaan terhadap individu atau kelompok berdasarkan aspek seperti ras, warna kulit, etnis, gender, cacat, orientasi seksual, kewarganegaraan, agama, dan lain-lain. Hal ini dapat berupa perkataan, tulisan, atau tindakan yang dilarang karena berpotensi memicu tindakan kekerasan atau prasangka​.(Dictionary.com).")
 st.info("Input teks Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediksi. Tekan 'RESET' untuk atur ulang halaman.")
 
 # Klasifikasi sentimen
@@ -118,29 +121,29 @@ with st.form(key='my_form'):
                 inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
                 output1 = model1(**inputs)
-                output2 = model2(**inputs)
-                output3 = model3(**inputs)
+                #output2 = model2(**inputs)
+                #output3 = model3(**inputs)
 
                 logits1 = output1.logits
-                logits2 = output2.logits
-                logits3 = output3.logits
+                #logits2 = output2.logits
+                #logits3 = output3.logits
 
                 max_sentiment_index = torch.argmax(logits1, dim=1).item()
                 max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
 
-                max_emotion_index = torch.argmax(logits2, dim=1).item()
-                max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+                #max_emotion_index = torch.argmax(logits2, dim=1).item()
+                #max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
-                max_hatespeech_index = torch.argmax(logits3, dim=1).item()
-                max_hatespeech_prob = torch.softmax(logits3, dim=1).squeeze()[max_hatespeech_index].item()
+                #max_hatespeech_index = torch.argmax(logits3, dim=1).item()
+                #max_hatespeech_prob = torch.softmax(logits3, dim=1).squeeze()[max_hatespeech_index].item()
 
                 sentiment_confidence = get_confidence_level(max_sentiment_prob)
-                emotion_confidence = get_confidence_level(max_emotion_prob)
-                hatespeech_confidence = get_confidence_level(max_hatespeech_prob)
+                #emotion_confidence = get_confidence_level(max_emotion_prob)
+                #hatespeech_confidence = get_confidence_level(max_hatespeech_prob)
 
                 st.write("Sentimen =", f"**{sentimen[max_sentiment_index]}**", ": Prediksi =", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence})")
-                st.write("Emosi =", f"**{emosi[max_emotion_index]}**", ": Prediksi =", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
-                st.write("Hate Speech =", f"**{hate[max_hatespeech_index]}**", ": Prediksi =", f"**{max_hatespeech_prob:.2%}**", f"({hatespeech_confidence})")
+                #st.write("Emosi =", f"**{emosi[max_emotion_index]}**", ": Prediksi =", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
+                #st.write("Hate Speech =", f"**{hate[max_hatespeech_index]}**", ": Prediksi =", f"**{max_hatespeech_prob:.2%}**", f"({hatespeech_confidence})")
         else:
             st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
 
