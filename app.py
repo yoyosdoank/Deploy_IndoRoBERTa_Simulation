@@ -37,7 +37,7 @@ def get_model():
     return tokenizer, model1
     #model2, model3
 
-tokenizer, model1, model2, model3 = get_model() 
+tokenizer, model1 = get_model() 
 
 st.image("banner_edit.png", use_column_width=True)
 header = st.title("IndoRoBERTa: Prediksi Sentimen Untuk Media Sosial Bahasa Indonesia Berbasis Teks.")
