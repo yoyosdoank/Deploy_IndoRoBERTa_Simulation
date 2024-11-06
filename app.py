@@ -50,18 +50,18 @@ st.info("Input teks Anda di kolom bawah dan tekan 'ANALISIS' untuk mulai prediks
 
 # Klasifikasi sentimen
 sentimen = {
-    2: 'POSITIF',  
-    1: 'NETRAL',
-    0: 'NEGATIF'
+    2: 'POSITIVE',  
+    1: 'NEUTRAL',
+    0: 'NEGATIVE'
 }
 
 # Klasifikasi emosi
 emosi = {
-    4: 'SEDIH-KECEWA',
-    3: 'SAYANG',
-    2: 'SENANG-BAHAGIA',  
-    1: 'TAKUT-KHAWATIR',
-    0: 'MARAH-JIJIK'
+    4: 'SADNESS',
+    3: 'LOVE',
+    2: 'HAPPY',  
+    1: 'FEAR',
+    0: 'ANGER'
 }
 
 # Klasifikasi hatespeech
@@ -141,8 +141,8 @@ with st.form(key='my_form'):
                 emotion_confidence = get_confidence_level(max_emotion_prob)
                 #hatespeech_confidence = get_confidence_level(max_hatespeech_prob)
 
-                st.write("Sentimen =", f"**{sentimen[max_sentiment_index]}**", ": Prediksi =", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence})")
-                st.write("Emosi =", f"**{emosi[max_emotion_index]}**", ": Prediksi =", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
+                st.write("Sentimen =", f"**{sentimen[max_sentiment_index]}**", ": Score =", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence})")
+                st.write("Emosi =", f"**{emosi[max_emotion_index]}**", ": Score =", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
                 #st.write("Hate Speech =", f"**{hate[max_hatespeech_index]}**", ": Prediksi =", f"**{max_hatespeech_prob:.2%}**", f"({hatespeech_confidence})")
         else:
             st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
