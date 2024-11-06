@@ -32,12 +32,12 @@ def is_number_or_punctuation(word):
 def get_model():
     tokenizer = AutoTokenizer.from_pretrained("flax-community/indonesian-roberta-base")
     model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Base-Twitter-Classifier", token="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")
-    #model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Base-Twitter-Classifier", token="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")
+    model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Base-Twitter-Classifier", token="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")
     #model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
-    return tokenizer, model1
+    return tokenizer, model1, model2
     #model2, model3
 
-tokenizer, model1 = get_model() 
+tokenizer, model1, model2 = get_model() 
 
 st.image("banner_edit.png", use_column_width=True)
 header = st.title("Indo-RoBERTa: Prediksi Sentimen Untuk Media Sosial Bahasa Indonesia Berbasis Teks.")
@@ -121,28 +121,28 @@ with st.form(key='my_form'):
                 inputs = tokenizer([user_input], padding=True, truncation=True, max_length=512, return_tensors='pt')
 
                 output1 = model1(**inputs)
-                #output2 = model2(**inputs)
+                output2 = model2(**inputs)
                 #output3 = model3(**inputs)
 
                 logits1 = output1.logits
-                #logits2 = output2.logits
+                logits2 = output2.logits
                 #logits3 = output3.logits
 
                 max_sentiment_index = torch.argmax(logits1, dim=1).item()
                 max_sentiment_prob = torch.softmax(logits1, dim=1).squeeze()[max_sentiment_index].item()
 
-                #max_emotion_index = torch.argmax(logits2, dim=1).item()
-                #max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
+                max_emotion_index = torch.argmax(logits2, dim=1).item()
+                max_emotion_prob = torch.softmax(logits2, dim=1).squeeze()[max_emotion_index].item()
 
                 #max_hatespeech_index = torch.argmax(logits3, dim=1).item()
                 #max_hatespeech_prob = torch.softmax(logits3, dim=1).squeeze()[max_hatespeech_index].item()
 
                 sentiment_confidence = get_confidence_level(max_sentiment_prob)
-                #emotion_confidence = get_confidence_level(max_emotion_prob)
+                emotion_confidence = get_confidence_level(max_emotion_prob)
                 #hatespeech_confidence = get_confidence_level(max_hatespeech_prob)
 
                 st.write("Sentimen =", f"**{sentimen[max_sentiment_index]}**", ": Prediksi =", f"**{max_sentiment_prob:.2%}**", f"({sentiment_confidence})")
-                #st.write("Emosi =", f"**{emosi[max_emotion_index]}**", ": Prediksi =", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
+                st.write("Emosi =", f"**{emosi[max_emotion_index]}**", ": Prediksi =", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
                 #st.write("Hate Speech =", f"**{hate[max_hatespeech_index]}**", ": Prediksi =", f"**{max_hatespeech_prob:.2%}**", f"({hatespeech_confidence})")
         else:
             st.error("Kalimat kurang dari 7 kata, input kembali pada kolom teks.")
