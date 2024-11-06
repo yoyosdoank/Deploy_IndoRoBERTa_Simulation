@@ -73,13 +73,13 @@ hate = {
 # Definisi kategori prediksi
 def get_confidence_level(prob):
     if prob >= 0.95:
-        return "Kategori **SANGAT TINGGI**, sangat dapat diandalkan"
+        return "Kategori **VERY HIGH**"
     elif prob >= 0.85:
-        return "Kategori **TINGGI**, umumnya dapat diandalkan"
+        return "Kategori **HIGH**"
     elif prob >= 0.70:
-        return "Kategori **MODERAT**, cukup dapat diandalkan, tetapi mungkin perlu verifikasi tambahan"
+        return "Kategori **MODERATE**"
     else:
-        return "Kategori **RENDAH**, perlu dipertimbangkan dengan hati-hati"
+        return "Kategori **LOW**"
 
 # Membuat form
 user_input = st.text_area('**MASUKKAN / SALIN TEKS DARI MEDIA SOSIAL:**')
