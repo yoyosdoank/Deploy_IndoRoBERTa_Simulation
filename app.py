@@ -90,7 +90,7 @@ with st.form(key='my_form'):
     reset_button = st.form_submit_button("RESET")
 
     if button and user_input:
-        if len(user_input.split()) > 7:
+        if len(user_input.split()) > 2:
             english_word_count = 0
             indonesian_word_count = 0
             warning_count = 0
