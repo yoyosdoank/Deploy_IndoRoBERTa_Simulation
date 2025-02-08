@@ -1,4 +1,4 @@
-﻿# FineTune_IndoRoBERTa_Model
+﻿# Deploy RoBERTa Model for Streamlit
 ## Citation
 - **Plain Text:**
 Y. O. Sihombing, R. Fuad Rachmadi, S. Sumpeno and M. J. Mubarok, "Optimizing IndoRoBERTa Model for Multi-Class Classification of Sentiment & Emotion on Indonesian Twitter," 2024 IEEE 10th Information Technology International Seminar (ITIS), Surabaya, Indonesia, 2024, pp. 12-17, doi: 10.1109/ITIS64716.2024.10845566.
