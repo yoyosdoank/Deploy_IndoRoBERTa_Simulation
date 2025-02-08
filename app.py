@@ -39,7 +39,7 @@ def get_model():
 
 tokenizer, model1, model2 = get_model() 
 
-st.image("banner_edit.png", use_column_width=True)
+st.image("banner_edit.png", use_container_width=True)
 header = st.title("IndoRoBERTa: Klasifikasi Sentimen dan Emosi Berbasis Teks Bahasa Indonesia.")
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
 note2 = st.write(
