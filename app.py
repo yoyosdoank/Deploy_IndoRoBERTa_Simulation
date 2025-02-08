@@ -147,7 +147,7 @@ with st.form(key='my_form'):
                 st.write("Emosi =", f"**{emosi[max_emotion_index]}**", ": Score =", f"**{max_emotion_prob:.2%}**", f"({emotion_confidence})")
                 #st.write("Hate Speech =", f"**{hate[max_hatespeech_index]}**", ": Prediksi =", f"**{max_hatespeech_prob:.2%}**", f"({hatespeech_confidence})")
         else:
-            st.error("Kalimat kurang dari 2 kata, input kembali pada kolom teks.")
+            st.error("Kalimat kurang dari 3 kata, input kembali pada kolom teks.")
 
     if reset_button:
         st.experimental_rerun()
@@ -180,7 +180,7 @@ st.markdown("""
             <li><strong>Jika <span style="color: yellow;">peringatan</span> muncul < 7, kalimat tetap dapat diprediksi. </strong></li>
             <li><strong>Jika <span style="color: yellow;">peringatan</span> muncul > 7, prediksi tidak berjalan, sesuaikan kembali input teks.</strong></li>
             </ul> 
-        <li><strong>Input teks minimal 7 kata.</strong></li>
+        <li><strong>Input teks minimal 3 kata.</strong></li>
     </ol>
     
 """, unsafe_allow_html=True) 
