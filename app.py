@@ -27,12 +27,12 @@ def has_consecutive_letters(word):
 def is_number_or_punctuation(word):
     return word.isdigit() or re.match(r'^[\W_]+$', word)
 
-# Definisi model deep learning
+# Definisi model Transformers
 @st.cache_resource()
 def get_model():
     tokenizer = AutoTokenizer.from_pretrained("flax-community/indonesian-roberta-base")
-    model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Sentiment-Base-Twitter-Classifier", token="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")
-    model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Emotion-Base-Twitter-Classifier", token="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")
+    model1 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Base-Sentiment-Indonesian-Social-Media")
+    model2 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Base-Emotion-Indonesian-Social-Media")
     #model3 = AutoModelForSequenceClassification.from_pretrained("yogie27/IndoRoBERTa-Hatespeech-Classifier-Base", token="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")
     return tokenizer, model1, model2
     #model2, model3
