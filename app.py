@@ -40,7 +40,7 @@ def get_model():
 tokenizer, model1, model2 = get_model() 
 
 st.image("banner_edit.png", use_container_width=True)
-header = st.title("IndoRoBERTa: Klasifikasi Sentimen dan Emosi Berbasis Teks Bahasa Indonesia.")
+header = st.title("Klasifikasi Sentimen dan Emosi Berbasis Teks Bahasa Indonesia.")
 note1 = st.caption("**Author: Yogie Oktavianus Sihombing**")
 note2 = st.write(
     #"EMOSI dan SENTIMEN adalah dua konsep yang berbeda meskipun saling terkait. EMOSI adalah keadaan psikologis yang kompleks dan alami, seperti kebahagiaan atau kemarahan, yang terdiri dari pengalaman subjektif, respons fisiologis, dan respons perilaku. Emosi bersifat mentah dan dapat dipicu oleh berbagai situasi atau kondisi individu. 
